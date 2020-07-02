@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="site">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="favicon" type="xs:string"></xs:element>
+                <xs:element name="url" type="xs:string"></xs:element>
+                <xs:element name="description" type="xs:string"></xs:element>
+                <xs:element name="globalRank" type="xs:int"></xs:element>
+                <xs:element name="country" type="xs:string"></xs:element>
+                <xs:element name="countryRank" type="xs:int"></xs:element>
+                <xs:element name="category">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"></xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="categoryRank" type="xs:int"></xs:element>
+                <xs:element name="totalVisit" type="xs:string"></xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

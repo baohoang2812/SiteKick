@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><techStack>
+    <site>
+        <name>BILIBILI.COM</name>
+    </site>
+    <technologyGroup>
+        <groupName>Analytics and Tracking</groupName>
+        <technology>
+            <techName>Google Analytics</techName>
+            <description>Google Analytics offers a host of compelling features and benefits for everyone from senior executives and advertising and marketing professionals to site owners and content developers.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Widgets</groupName>
+        <technology>
+            <techName>China Ministry of Public Security</techName>
+            <description>The website contains a link to a public website security profile for China on the Ministry of Public Security for Public Information Network Security Supervision.</description>
+        </technology>
+        <technology>
+            <techName>COVID-19</techName>
+            <description>This website mentions COVID-19 / Novel Coronavirus.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Language</groupName>
+        <technology>
+            <techName>Chinese</techName>
+            <description>Website content is written in Chinese.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Frameworks</groupName>
+        <technology>
+            <techName>GlobalSign Domain Verification</techName>
+            <description>Domain verification for SSL certificate validation.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Payment</groupName>
+        <technology>
+            <techName>Japanese Yen</techName>
+            <description>The website uses the ¥ symbol on its website - meaning it may accept payment in this Japanese currency.</description>
+        </technology>
+        <technology>
+            <techName>Pound Sterling</techName>
+            <description>The website uses the £ symbol on its website - meaning it may accept payment in this British currency.</description>
+        </technology>
+        <technology>
+            <techName>Maestro</techName>
+            <description>The website accepts payments with Maestro.</description>
+        </technology>
+        <technology>
+            <techName>Visa</techName>
+            <description>The website accepts payments with Visa.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>JavaScript Libraries and Functions</groupName>
+        <technology>
+            <techName>jQuery</techName>
+            <description>JQuery is a fast, concise, JavaScript Library that simplifies how you traverse HTML documents, handle events, perform animations, and add Ajax interactions to your web pages. jQuery is designed to change the way that you write JavaScript.</description>
+        </technology>
+        <technology>
+            <techName>jQuery UI</techName>
+            <description>jQuery UI provides abstractions for low-level interaction and animation, advanced effects and high-level, themeable widgets, built on top of the jQuery JavaScript Library, that you can use to build highly interactive web applications.</description>
+        </technology>
+        <technology>
+            <techName>SWFObject</techName>
+            <description>SWFObject is a small Javascript file used for embedding Adobe Flash content. The script can detect the Flash plug-in in all major web browsers (on Mac and PC) and is designed to make embedding Flash movies as easy as possible.</description>
+        </technology>
+        <technology>
+            <techName>Webpack</techName>
+            <description>webpack takes modules with dependencies and generates static assets representing those modules.</description>
+        </technology>
+        <technology>
+            <techName>core-js</techName>
+            <description>Modular standard library for JavaScript.</description>
+        </technology>
+        <technology>
+            <techName>Babel</techName>
+            <description>Babel is a JavaScript compiler.</description>
+        </technology>
+        <technology>
+            <techName>Vue</techName>
+            <description>vue.js a JavaScript MVVM framework.</description>
+        </technology>
+        <technology>
+            <techName>Yahoo User Interface</techName>
+            <description>The Yahoo! User Interface (YUI) Library is a set of utilities and controls, written in JavaScript, for building richly interactive web applications using techniques such as DOM scripting, DHTML and AJAX.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Advertising</groupName>
+        <technology>
+            <techName>DoubleClick.Net</techName>
+            <description>DoubleClick enables agencies, marketers and publishers to work together successfully and profit from their digital marketing investments.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>SSL Certificates</groupName>
+        <technology>
+            <techName>GlobalSign</techName>
+            <description>Certificate provided by GlobalSign.</description>
+        </technology>
+        <technology>
+            <techName>SSL by Default</techName>
+            <description>The website redirects traffic to an HTTPS/SSL version by default.</description>
+        </technology>
+        <technology>
+            <techName>Common Name Invalid</techName>
+            <description>The Common Name/SAN value of this websites SSL certificate does not correspond to the domain name.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Web Hosting Providers</groupName>
+        <technology>
+            <techName>China Telecom</techName>
+            <description>State owned telecome hoster in China.</description>
+        </technology>
+        <technology>
+            <techName>Alibaba</techName>
+            <description>Chinese based trading site.</description>
+        </technology>
+        <technology>
+            <techName>China Unicom</techName>
+            <description>Chinese based internet technology center.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Email Hosting Providers</groupName>
+        <technology>
+            <techName>SPF</techName>
+            <description>The Sender Policy Framework is an open standard specifying a technical method to prevent sender address forgery.</description>
+        </technology>
+        <technology>
+            <techName>Microsoft Azure DNS</techName>
+            <description>This domain is verified with Microsoft Azure.</description>
+        </technology>
+        <technology>
+            <techName>DMARC</techName>
+            <description>A technical specification created by a group of organizations that want to help reduce the potential for email-based abuse</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Web Servers</groupName>
+        <technology>
+            <techName>Tengine</techName>
+            <description>Tengine is a web server developed by the Servers Platform Team at Taobao. Based on nginx.</description>
+        </technology>
+    </technologyGroup>
+</techStack>
