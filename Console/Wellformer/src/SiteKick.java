@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
