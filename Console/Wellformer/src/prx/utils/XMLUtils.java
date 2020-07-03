@@ -9,7 +9,6 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.tools.xjc.api.S2JJAXBModel;
 import com.sun.tools.xjc.api.SchemaCompiler;
 import com.sun.tools.xjc.api.XJC;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,6 +38,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
+import org.eclipse.persistence.internal.oxm.ByteArraySource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.ErrorHandler;
@@ -93,6 +93,13 @@ public class XMLUtils {
         return clazz.cast(unmarshaller.unmarshal(xmlFile));
     }
 
+    // Unmarshall from string
+    public static <T> T unmarshall(Class<T> clazz, String source) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(clazz);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+        return clazz.cast(unmarshaller.unmarshal(new InputSource(new StringReader(source))));
+    }
+
     public static <T> void marshall(T obj, File xmlFile) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(obj.getClass());
         Marshaller marshaller = jaxbContext.createMarshaller();
@@ -127,20 +134,33 @@ public class XMLUtils {
         return writer.toString();
     }
 
-    // TODO check validate from String 
-    public static boolean isXMLValidate(String xsdPath, String xmlPath) {
+    // TODO check validate from String not path
+    public static boolean isXMLValidateFromFilePath(String xsdPath, String xmlPath) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = factory.newSchema(new File(xsdPath));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlPath)));
         } catch (SAXException | IOException e) {
-            e.printStackTrace();
+            System.out.println(xmlPath + " is NOT validate, error: " + e.getMessage());
             return false;
         }
         return true;
     }
-    
+
+    public static boolean isXMLValidate(String xsdPath, String source) {
+        try {
+            SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = factory.newSchema(new File(xsdPath));
+            Validator validator = schema.newValidator();
+            validator.validate(new ByteArraySource(source.getBytes()));
+        } catch (SAXException | IOException e) {
+            System.out.println("NOT validate, error: " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public static boolean isWellformXML(String src) {
         // use DocumentBuilder + SAX parser to check 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -172,7 +192,7 @@ public class XMLUtils {
             }
         });
         try {
-            builder.parse(new ByteArrayInputStream(src.getBytes(StandardCharsets.UTF_8)));
+            builder.parse(new InputSource(new StringReader(src)));
             return true;
         } catch (SAXException | IOException e) {
             return false;

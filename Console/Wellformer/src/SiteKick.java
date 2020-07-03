@@ -47,9 +47,9 @@ public class SiteKick {
                 } else {
                     System.out.println("Unwell-form");
                 }
-                PrintWriter pw = new PrintWriter("src/test/builtwith_" + "bilibili" + ".html");
-                pw.print(pageContent);
-                pw.close();
+//                PrintWriter pw = new PrintWriter("src/test/builtwith_" + "bilibili" + ".html");
+//                pw.print(pageContent);
+//                pw.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

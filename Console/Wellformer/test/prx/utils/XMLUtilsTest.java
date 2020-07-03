@@ -6,10 +6,13 @@
 package prx.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javax.xml.transform.TransformerException;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import prx.config.SystemConfig;
 
 /**
  *
@@ -66,10 +69,14 @@ public class XMLUtilsTest {
     @Test
     public void testGenerateClass() throws Exception {
         System.out.println("Test Generate Class");
-        String packageName = "";
-        File file = null;
-        String outputPath = "";
-        XMLUtils.generateClass(packageName, file, outputPath);
+        String packageName = "data";
+        String builtWithXsdPath = "src/prx/schema/builtwithSchema.xsd";
+        String similarWebXsdPath = "src/prx/schema/siteSchema.xsd";
+        File builtWithSchemaFile = new File(builtWithXsdPath);
+        File similarWebSchemaFile = new File(similarWebXsdPath);
+        String outputPath = "src/prx/";
+        XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
+        XMLUtils.generateClass(packageName, similarWebSchemaFile, outputPath);
     }
 
     /**
@@ -136,7 +143,7 @@ public class XMLUtilsTest {
         String xsdPath = "src/prx/schema/builtwithSchema.xsd";
         String xmlPath = "src/test/builtwith_bilibili_output.xml";
         boolean expResult = true;
-        boolean result = XMLUtils.isXMLValidate(xsdPath, xmlPath);
+        boolean result = XMLUtils.isXMLValidateFromFilePath(xsdPath, xmlPath);
         assertEquals(expResult, result);
     }
 
@@ -146,7 +153,31 @@ public class XMLUtilsTest {
         String xsdPath = "src/prx/schema/siteSchema.xsd";
         String xmlPath = "src/test/site_bilibili_output.xml";
         boolean expResult = true;
-        boolean result = XMLUtils.isXMLValidate(xsdPath, xmlPath);
+        boolean result = XMLUtils.isXMLValidateFromFilePath(xsdPath, xmlPath);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testIsXMLValidate_BuiltWith_StringInput() throws IOException, TransformerException {
+        System.out.println("Test XML Validate Similar Web");
+        String pageContent = HttpUtils.getContent("https://builtwith.com/bilibili.com");
+        pageContent = TextUtils.refineHtml(pageContent);
+        String xml = XMLUtils.transformFromString(SystemConfig.TECH_XSL_PATH, pageContent);
+        String xsdPath = "src/prx/schema/builtwithSchema.xsd";
+        boolean expResult = true;
+        boolean result = XMLUtils.isXMLValidate(xsdPath, xml);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testIsXMLValidate_SimilarWeb_StringInput() throws IOException, TransformerException {
+        System.out.println("Test XML Validate Similar Web");
+        String pageContent = HttpUtils.getContent("https://www.similarweb.com/website/bilibili.com");
+        pageContent = TextUtils.refineHtml(pageContent);
+        String xml = XMLUtils.transformFromString(SystemConfig.SITE_XSL_PATH, pageContent);
+        String xsdPath = "src/prx/schema/siteSchema.xsd";
+        boolean expResult = true;
+        boolean result = XMLUtils.isXMLValidate(xsdPath, xml);
         assertEquals(expResult, result);
     }
 
@@ -162,7 +193,7 @@ public class XMLUtilsTest {
 
         } catch (Exception e) {
             e.printStackTrace();
-            fail("Not well form: "+e.getMessage());
+            fail("Not well form: " + e.getMessage());
         }
 
     }

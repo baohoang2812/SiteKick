@@ -16,6 +16,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import prx.config.SystemConfig;
 import prx.utils.XMLUtils;
 
 /**
@@ -26,13 +27,17 @@ public class SimilarWebParser extends Parser {
 
     private Set<String> pageDetailLinkSet;
     private String urlXPath;
+    private String categoryXPath;
     private int pageCount;
 
-    public SimilarWebParser(Set<String> pageDetailLinkSet, String expression) {
+    public SimilarWebParser(Set<String> pageDetailLinkSet, String urlXPath, String categoryXPath, int pageCount) {
         this.pageDetailLinkSet = pageDetailLinkSet;
-        this.urlXPath = expression;
+        this.urlXPath = urlXPath;
+        this.categoryXPath = categoryXPath;
+        this.pageCount = pageCount;
     }
 
+    
     public SimilarWebParser() {
         this.pageDetailLinkSet = new HashSet();
     }
@@ -61,8 +66,24 @@ public class SimilarWebParser extends Parser {
         this.pageCount = pageCount;
     }
 
+    public String getUrlXPath() {
+        return urlXPath;
+    }
+
+    public void setUrlXPath(String urlXPath) {
+        this.urlXPath = urlXPath;
+    }
+
+    public String getCategoryXPath() {
+        return categoryXPath;
+    }
+
+    public void setCategoryXPath(String categoryXPath) {
+        this.categoryXPath = categoryXPath;
+    }
+
     // TODO change to parse All Category
-    private void parseAllPageCount() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+    private void parseAllCategory() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
         for (int pageIndex = 0; pageIndex <= pageCount; pageIndex++) {
             String pageContent = preprocessPageContent(constructLink());
             Document doc = XMLUtils.parseStringToDOM(pageContent);
@@ -76,9 +97,11 @@ public class SimilarWebParser extends Parser {
         for (String link : pageDetailLinkSet) {
             try {
                 String content = preprocessPageContent(link);
-                // TODO apply xslt from HTML to XML
+                // Transform
                 // TODO output of apply is only 1 list items not 1 item/ xml
-                XMLUtils.transformFromString("", content);
+                String xml = XMLUtils.transformFromString(SystemConfig.SITE_XSL_PATH, content);
+                // JAXB
+//                XMLUtils.unmarshall(clazz, xmlFile);
             } catch (IOException | TransformerException e) {
                 System.out.println("!!! Parsing Page Detail ERROR !!!");
                 System.out.println("Page: " + link);
@@ -102,6 +125,14 @@ public class SimilarWebParser extends Parser {
         }
     }
 
-  
+    @Override
+    public void parse() throws IOException {
+        System.out.println("================================================");
+        System.out.println("Parsing www.similarweb.com . . .");
+        
+        System.out.println("Finish parsing www.similarweb.com");
+        System.out.println("================================================");
+    }
+    
 
 }

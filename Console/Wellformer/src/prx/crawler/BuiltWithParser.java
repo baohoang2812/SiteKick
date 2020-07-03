@@ -5,10 +5,20 @@
  */
 package prx.crawler;
 
+import java.io.IOException;
+
 /**
  *
  * @author Gia Bảo Hoàng
  */
-public class BuiltWithParser extends Parser{
-    
+public class BuiltWithParser extends Parser {
+
+    @Override
+    public void parse() throws IOException {
+        System.out.println("================================================");
+        System.out.println("Parsing www.builtwith.com . . .");
+
+        System.out.println("Finish parsing www.builtwith.com");
+        System.out.println("================================================");
+    }
 }
