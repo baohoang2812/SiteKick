@@ -5,7 +5,11 @@
  */
 package prx.utils;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -21,14 +25,18 @@ public class HttpUtilsTest {
      * Test of getContent method, of class HttpUtils.
      */
     @Test
-    public void testGetContent() {
+    public void testGetContent() throws IOException {
         String result = null;
-        try {
-            result = HttpUtils.getContent("https://pibook.vn/moi-phat-hanh");
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<String> urls = new ArrayList();
+        urls.add("https://www.similarweb.com/top-websites/category/finance/insurance");
+        urls.add("https://www.similarweb.com/top-websites/category/hobbies-and-leisure/photography/");
+        for (String link : urls) {
+            result = HttpUtils.getContent(link);
+            result = TextUtils.refineHtml(result);
+            if (null == result || result.isEmpty()) {
+                fail("GET Content Failed!!");
+            }
         }
-        Assert.assertNotNull(result);
     }
 
 }

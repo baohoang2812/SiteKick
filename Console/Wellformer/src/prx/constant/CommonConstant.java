@@ -29,4 +29,8 @@ public class CommonConstant {
     public static final char S_QUOT = '\'';
     public static final char SPACE = ' ';
     public static final String TRUE_STRING = "true";
+    public static final String SLASH_STRING = "/";
+    
+    public static final String HTTPS_PROTOCOL = "https";
+    
 }
