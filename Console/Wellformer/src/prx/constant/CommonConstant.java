@@ -16,7 +16,6 @@ public class CommonConstant {
     public static final char HYPHEN = '-';
     public static final char PERIOD = '.';
 
-    public static final String EMPTY = "";
     public static final char EMPTY_CHAR = '\0';
     public static final char AMPERSAND = '&';
     public static final char BACKSLASH = '\\';
@@ -28,9 +27,13 @@ public class CommonConstant {
     public static final char D_QUOT = '"';
     public static final char S_QUOT = '\'';
     public static final char SPACE = ' ';
+
+    public static final String EMPTY = "";
     public static final String TRUE_STRING = "true";
     public static final String SLASH_STRING = "/";
-    
+    public static final String UNDERSCORE_STRING = "_";
+    public static final String HYPHEN_STRING = "-";
+
     public static final String HTTPS_PROTOCOL = "https";
-    
+
 }

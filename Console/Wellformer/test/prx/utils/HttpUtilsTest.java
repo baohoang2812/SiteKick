@@ -29,7 +29,7 @@ public class HttpUtilsTest {
         String result = null;
         List<String> urls = new ArrayList();
         urls.add("https://www.similarweb.com/top-websites/category/finance/insurance");
-        urls.add("https://www.similarweb.com/top-websites/category/hobbies-and-leisure/photography/");
+        urls.add("https://www.similarweb.com/top-websites/category/hobbies-and-leisure/photography");
         for (String link : urls) {
             result = HttpUtils.getContent(link);
             result = TextUtils.refineHtml(result);

@@ -103,16 +103,14 @@ public class SimilarWebParser extends Parser {
         this.setNavigationPath(SystemConfig.SITE_CATEGORY_NAVIGATION_PATH);
         for (String categoryPath : categoryLinkSet) {
             try {
-                System.out.println("Parsing Page: "+ constructLink(categoryPath));
+                System.out.println("Parsing Page: " + constructLink(categoryPath));
                 String categoryPageContent = preprocessPageContent(constructLink(categoryPath));
-//                if (!categoryPageContent.isEmpty()) {
-                    Document document = XMLUtils.parseStringToDOM(categoryPageContent);
-                    // get site Detail URLs
-                    retrieveLinks(document, urlXPath, pageDetailLinkSet);
-                    // get site Domain Set
-                    retrieveLinks(document, domainXPath, domainSet);
-//                } 
-                System.out.println("Finish parsing page: "+ constructLink(categoryPath));
+                Document document = XMLUtils.parseStringToDOM(categoryPageContent);
+                // get site Detail URLs
+                retrieveLinks(document, urlXPath, pageDetailLinkSet);
+                // get site Domain Set
+                retrieveLinks(document, domainXPath, domainSet);
+                System.out.println("Finish parsing page: " + constructLink(categoryPath));
             } catch (IOException | XPathExpressionException | ParserConfigurationException | SAXException e) {
                 System.out.println("!!!Parsing Category Page ERROR!!! " + constructLink(categoryPath));
                 Logger.getLogger(SimilarWebParser.class.getName()).log(Level.SEVERE, e.getMessage());

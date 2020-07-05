@@ -98,7 +98,9 @@ public class Parser {
     public String constructLink(String param) {
         String navPath = getSlashPrefixPath(navigationPath);
         String paramPath = isNullOrEmpty(param) ? CommonConstant.EMPTY : getSlashPrefixPath(param);
-        return baseURL + navPath + paramPath;
+        String result = baseURL + navPath + paramPath;
+        result = result.replaceAll(CommonConstant.UNDERSCORE_STRING, CommonConstant.HYPHEN_STRING);
+        return result;
     }
 
     public boolean isStartWithSlash(String path) {
