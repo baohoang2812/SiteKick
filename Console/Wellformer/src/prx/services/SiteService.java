@@ -5,16 +5,16 @@
  */
 package prx.services;
 
-import prx.blo.SiteBLO;
+import prx.dao.SiteDAO;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
 public class SiteService {
-    SiteBLO siteBLO;
+    SiteDAO siteBLO;
 
-    public SiteService(SiteBLO siteBLO) {
+    public SiteService(SiteDAO siteBLO) {
         this.siteBLO = siteBLO;
     }
     

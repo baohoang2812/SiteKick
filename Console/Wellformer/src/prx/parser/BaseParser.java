@@ -13,7 +13,14 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import prx.constant.CommonConstant;
 import prx.utils.HttpUtils;
 import prx.utils.TextUtils;
@@ -23,7 +30,7 @@ import prx.utils.XMLUtils;
  *
  * @author Gia Bảo Hoàng
  */
-public class Parser {
+public class BaseParser {
 
     protected String baseURL;
     protected String navigationPath;
@@ -31,10 +38,10 @@ public class Parser {
     protected String xslPath;
     protected String xsdPath;
 
-    public Parser() {
+    public BaseParser() {
     }
 
-    public Parser(String baseURL, String navigationPath, String urlXPath, String xslPath, String xsdPath) {
+    public BaseParser(String baseURL, String navigationPath, String urlXPath, String xslPath, String xsdPath) {
         this.baseURL = baseURL;
         this.navigationPath = navigationPath;
         this.urlXPath = urlXPath;
@@ -148,6 +155,7 @@ public class Parser {
         List<T> result = dataList;
     }
 
+    //depreciated
     protected <T> void parsePageSet(Class<T> klass, Set<String> linkSet) {
         List<T> dataList = null;
         for (String link : linkSet) {
@@ -159,4 +167,15 @@ public class Parser {
         }
     }
 
+    protected void retrieveLinks(Document document, String expression, Set<String> linkSet)
+            throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+        XPath xpath = XMLUtils.getXPath();
+        // list of attribute nodes
+        NodeList linkList = (NodeList) xpath.evaluate(expression, document, XPathConstants.NODESET);
+        int i = 0;
+        while (i < linkList.getLength()) {
+            linkSet.add(linkList.item(i).getNodeValue());
+            i++;
+        }
+    }
 }

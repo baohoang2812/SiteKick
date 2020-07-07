@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author Gia Bảo Hoàng
  */
-public class BuiltWithParser extends Parser {
+public class BuiltWithParser extends BaseParser {
 
     Set<String> domainSet;
 

@@ -22,9 +22,13 @@ public class SystemConfig {
 
     public static final String SITE_ALL_CATEGORY_NAVIGATION_PATH = "/top-websites";
     public static final String SITE_CATEGORY_NAVIGATION_PATH = "/top-websites/category";
+    public static final String SITE_DETAIL_NAVIGATION_PATH = "/website";
 
     public static final String SITE_DETAIL_URL_XPATH = "//td[contains(@class,'topWebsitesGrid-cellWebsite')]//*[@itemprop='url' and @data-analytics-category='Internal Link']/@href";
     public static final String SITE_DOMAIN_XPATH = "//td[contains(@class,'topWebsitesGrid-cellWebsite')]//*[@itemprop='url' and contains(@class,'linkout')]/@href";
     public static final String SITE_CATEGORY_XPATH = "//*[contains(@class,'topRankingHeader-dropdownItem')]"
             + "//select[contains(@class,'category')]/option[not(contains(@data-group-parent,'true')) and not(contains(@value,'ALL'))]/@value";
+    
+    public static final int BREAK_TIME_CRAWLING = 10;
+    public static final String PU_NAME = "CrawlerPU";
 }

@@ -37,13 +37,18 @@ public class SiteKick {
 
     public static Set<String> parseSimilarWeb() {
         SimilarWebParser similarWebParser = new SimilarWebParser();
-        similarWebParser.setCategoryXPath(SystemConfig.SITE_CATEGORY_XPATH);
+        // home page
+        //similarWebParser.setNavigationPath(SystemConfig.SITE_ALL_CATEGORY_NAVIGATION_PATH);
+        //similarWebParser.setCategoryXPath(SystemConfig.SITE_CATEGORY_XPATH);
+        
+        //similarWebParser.setBaseURL(SystemConfig.SIMILAR_WEB_BASE_URL);
+        
+        // category page
         similarWebParser.setUrlXPath(SystemConfig.SITE_DETAIL_URL_XPATH);
-        similarWebParser.setBaseURL(SystemConfig.SIMILAR_WEB_BASE_URL);
+        similarWebParser.setDomainXPath(SystemConfig.SITE_DOMAIN_XPATH);
+        // detail page
         similarWebParser.setXslPath(SystemConfig.SITE_XSL_PATH);
         similarWebParser.setXsdPath(SystemConfig.SITE_XSD_PATH);
-        similarWebParser.setNavigationPath(SystemConfig.SITE_ALL_CATEGORY_NAVIGATION_PATH);
-        similarWebParser.setDomainXPath(SystemConfig.SITE_DOMAIN_XPATH);
         similarWebParser.parse();
         return similarWebParser.getDomainSet();
     }

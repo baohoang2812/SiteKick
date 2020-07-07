@@ -12,39 +12,32 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import prx.config.SystemConfig;
+import prx.thread.BaseThread;
 import prx.utils.XMLUtils;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
-public class SimilarWebParser extends Parser {
+public class SimilarWebParser extends BaseParser implements Runnable {
 
-    private Set<String> pageDetailLinkSet;
     private Set<String> categoryLinkSet;
     private Set<String> domainSet;
-    private String categoryXPath;
     private String domainXPath;
 
     public SimilarWebParser() {
-        this.pageDetailLinkSet = new HashSet();
         this.categoryLinkSet = new HashSet();
         this.domainSet = new HashSet<>();
     }
 
-    public SimilarWebParser(Set<String> pageDetailLinkSet, Set<String> categoryLinkSet, Set<String> domainSet, String categoryXPath, String domainXPath, String baseURL, String navigationPath, String urlXPath, String xslPath, String xsdPath) {
+    public SimilarWebParser(Set<String> categoryLinkSet, Set<String> domainSet, String domainXPath, String baseURL, String navigationPath, String urlXPath, String xslPath, String xsdPath) {
         super(baseURL, navigationPath, urlXPath, xslPath, xsdPath);
-        this.pageDetailLinkSet = pageDetailLinkSet;
         this.categoryLinkSet = categoryLinkSet;
         this.domainSet = domainSet;
-        this.categoryXPath = categoryXPath;
         this.domainXPath = domainXPath;
     }
 
@@ -72,42 +65,15 @@ public class SimilarWebParser extends Parser {
         this.categoryLinkSet = categoryLinkSet;
     }
 
-    public Set<String> getPageDetailLinkSet() {
-        return pageDetailLinkSet;
-    }
-
-    public void setPageDetailLinkSet(Set<String> pageDetailLinkSet) {
-        this.pageDetailLinkSet = pageDetailLinkSet;
-    }
-
-    public String getCategoryXPath() {
-        return categoryXPath;
-    }
-
-    public void setCategoryXPath(String categoryXPath) {
-        this.categoryXPath = categoryXPath;
-    }
-
-    private void parseAllCategory() {
-        String homePage = constructLink(null);
-        try {
-            String homePageContent = preprocessPageContent(homePage);
-            Document doc = XMLUtils.parseStringToDOM(homePageContent);
-            retrieveLinks(doc, categoryXPath, categoryLinkSet);
-        } catch (IOException | XPathExpressionException | ParserConfigurationException | SAXException e) {
-            System.out.println("!!!Parsing Home Page ERROR!!!");
-            Logger.getLogger(SimilarWebParser.class.getName()).log(Level.SEVERE, e.getMessage());
-            e.printStackTrace();
-        }
-
-        this.setNavigationPath(SystemConfig.SITE_CATEGORY_NAVIGATION_PATH);
+    private Set<String> parseCategory() {
+        Set<String> siteDetailLinkSet = new HashSet();
         for (String categoryPath : categoryLinkSet) {
             try {
-                System.out.println("Parsing Page: " + constructLink(categoryPath));
+                System.out.println("Parsing Category: " + constructLink(categoryPath));
                 String categoryPageContent = preprocessPageContent(constructLink(categoryPath));
                 Document document = XMLUtils.parseStringToDOM(categoryPageContent);
                 // get site Detail URLs
-                retrieveLinks(document, urlXPath, pageDetailLinkSet);
+                retrieveLinks(document, urlXPath, siteDetailLinkSet);
                 // get site Domain Set
                 retrieveLinks(document, domainXPath, domainSet);
                 System.out.println("Finish parsing page: " + constructLink(categoryPath));
@@ -117,19 +83,7 @@ public class SimilarWebParser extends Parser {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void retrieveLinks(Document document, String expression, Set<String> linkSet)
-            throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-
-        XPath xpath = XMLUtils.getXPath();
-        // list of attribute nodes
-        NodeList linkList = (NodeList) xpath.evaluate(expression, document, XPathConstants.NODESET);
-        int i = 0;
-        while (i < linkList.getLength()) {
-            linkSet.add(linkList.item(i).getNodeValue());
-            i++;
-        }
+        return siteDetailLinkSet;
     }
 
     @Override
@@ -137,10 +91,51 @@ public class SimilarWebParser extends Parser {
         System.out.println("================================================");
         System.out.println("Parsing " + baseURL + " . . .");
         System.out.println("Getting Page " + baseURL + " category list . . .");
-        parseAllCategory();
-        parsePageSet(Site.class, pageDetailLinkSet);
+        //getCategories()
+//        getCategoryItemLinks();
+//        parsePageSet(Site.class, pageDetailLinkSet);
         System.out.println("Finish parsing " + baseURL);
         System.out.println("================================================");
+    }
+
+    @Override
+    public void run() {
+        //TODO save category to DB
+        try {
+            synchronized (BaseThread.getInstance()) {
+                while (BaseThread.isSuspended()) {
+                    BaseThread.getInstance().wait();
+                }
+            }
+        } catch (InterruptedException e) {
+            Logger.getLogger(SimilarWebParser.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+        Set<String> siteDetailLinkSet = parseCategory();
+        for (String detailLink : siteDetailLinkSet) {
+            Thread detailThread = createDetailPageParserThread(detailLink);
+            detailThread.start();
+            try {
+                synchronized (BaseThread.getInstance()) {
+                    while (BaseThread.isSuspended()) {
+                        BaseThread.getInstance().wait();
+                    }
+                }
+            } catch (InterruptedException e) {
+                Logger.getLogger(SimilarWebParser.class.getName()).log(Level.SEVERE, e.getMessage());
+            }
+        }
+
+    }
+
+    private Thread createDetailPageParserThread(String url) {
+        SimilarWebDetailParser detailPageParser = new SimilarWebDetailParser();
+        // set prop
+        detailPageParser.setBaseURL(SystemConfig.SIMILAR_WEB_BASE_URL);
+        detailPageParser.setNavigationPath(SystemConfig.SITE_DETAIL_NAVIGATION_PATH);
+        detailPageParser.setXsdPath(SystemConfig.SITE_XSD_PATH);
+        detailPageParser.setXslPath(SystemConfig.SITE_XSL_PATH);
+        detailPageParser.setDetailURL(constructLink(url));
+        return new Thread(detailPageParser);
     }
 
 }
