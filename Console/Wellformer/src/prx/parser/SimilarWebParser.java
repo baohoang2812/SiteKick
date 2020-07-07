@@ -5,7 +5,6 @@
  */
 package prx.parser;
 
-import data.Site;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +18,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import prx.config.SystemConfig;
+import prx.entity.Site;
 import prx.utils.XMLUtils;
 
 /**
@@ -121,7 +121,6 @@ public class SimilarWebParser extends Parser {
 
     private void retrieveLinks(Document document, String expression, Set<String> linkSet)
             throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-
         XPath xpath = XMLUtils.getXPath();
         // list of attribute nodes
         NodeList linkList = (NodeList) xpath.evaluate(expression, document, XPathConstants.NODESET);

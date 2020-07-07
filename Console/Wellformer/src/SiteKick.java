@@ -7,6 +7,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -31,8 +32,9 @@ public class SiteKick {
      */
     public static void main(String[] args) {
         generateCode();
-        Set<String> domainSet = parseSimilarWeb();
-//        parseBuiltWith(domainSet);
+//        Set<String> domainSet = parseSimilarWeb();
+        Set<String> domainSet = new HashSet();
+        parseBuiltWith(domainSet);
     }
 
     public static Set<String> parseSimilarWeb() {
@@ -59,12 +61,12 @@ public class SiteKick {
     }
 
     public static void generateCode() {
-        String packageName = "data";
+        String packageName = "prx.data";
         String builtWithXsdPath = SystemConfig.TECH_XSD_PATH;
         String similarWebXsdPath = SystemConfig.SITE_XSD_PATH;
         File builtWithSchemaFile = new File(builtWithXsdPath);
         File similarWebSchemaFile = new File(similarWebXsdPath);
-        String outputPath = "src/prx/";
+        String outputPath = "src/";
         try {
             XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
             XMLUtils.generateClass(packageName, similarWebSchemaFile, outputPath);

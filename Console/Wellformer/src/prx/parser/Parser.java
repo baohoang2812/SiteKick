@@ -5,8 +5,8 @@
  */
 package prx.parser;
 
-import data.Site;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -119,17 +119,16 @@ public class Parser {
         System.out.println("Parsing Page " + baseURL + " Detail");
         List<T> dataList = new ArrayList();
         try {
-            String content = preprocessPageContent(link);
+            String content = preprocessPageContent(constructLink(link));
             // Transform
             String xmlContent = XMLUtils.transformFromString(xslPath, content);
             // Validate XML with Schema
             boolean isValid = XMLUtils.isXMLValidate(xsdPath, xmlContent);
             // JAXB
             if (isValid) {
-                T data = XMLUtils.unmarshall((Class<T>) klass.getClass(), xmlContent);
+                T data = XMLUtils.unmarshall(klass, xmlContent);
                 dataList.add(data);
             } else {
-                // TODO do what when invalid
                 System.out.println("INVALID XML");
             }
 
@@ -151,11 +150,11 @@ public class Parser {
     protected <T> void parsePageSet(Class<T> klass, Set<String> linkSet) {
         List<T> dataList = null;
         for (String link : linkSet) {
-            dataList = parsePageDetail(link, (Class<T>) klass.getClass());
-        }
-        // JPA 
-        if (null != dataList && !dataList.isEmpty()) {
-            loadToDatabase(dataList);
+            dataList = parsePageDetail(link, klass);
+            // JPA 
+            if (null != dataList && !dataList.isEmpty()) {
+                loadToDatabase(dataList);
+            }
         }
     }
 

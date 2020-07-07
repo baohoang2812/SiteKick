@@ -5,10 +5,8 @@
  */
 package prx.parser;
 
-import data.TechStack;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
+import prx.data.TechStack;
 
 /**
  *

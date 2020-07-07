@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?><techStack xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="www.sitekick.com/tech">
+    <site>
+        <name>LINKEDIN.COM</name>
+    </site>
+    <technologyGroup>
+        <groupName>Widgets</groupName>
+        <technology>
+            <techName>COVID-19</techName>
+            <description>This website mentions COVID-19 / Novel Coronavirus.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Language</groupName>
+        <technology>
+            <techName>German HREF LANG</techName>
+            <description>This webpage has alternate versions available in German via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>English HREF LANG</techName>
+            <description>This webpage has alternate versions available in English via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Spanish HREF LANG</techName>
+            <description>This webpage has alternate versions available in Spanish via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Chinese HREF LANG</techName>
+            <description>This webpage has alternate versions available in Chinese via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Japanese HREF LANG</techName>
+            <description>This webpage has alternate versions available in Japanese via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Arabic HREF LANG</techName>
+            <description>This webpage has alternate versions available in Arabic via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>French HREF LANG</techName>
+            <description>This webpage has alternate versions available in French via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Russian HREF LANG</techName>
+            <description>This webpage has alternate versions available in Russian via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Korean HREF LANG</techName>
+            <description>This webpage has alternate versions available in Korean via the use of the hreflang tag.</description>
+        </technology>
+        <technology>
+            <techName>Thai HREF LANG</techName>
+            <description>This webpage has alternate versions available in Thai via the use of the hreflang tag.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Frameworks</groupName>
+        <technology>
+            <techName>Java EE</techName>
+            <description>Java Platform, Enterprise Edition (Java EE) is the industry standard for developing portable, robust, scalable and secure server-side Java applications.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Mobile</groupName>
+        <technology>
+            <techName>Viewport Meta</techName>
+            <description>This page uses the viewport meta tag which means the content may be optimized for mobile content.</description>
+        </technology>
+        <technology>
+            <techName>IPhone / Mobile Compatible</techName>
+            <description>The website contains code that allows the page to support IPhone / Mobile Content.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Audio / Video Media</groupName>
+        <technology>
+            <techName>YouTube</techName>
+            <description>Embedded videos from YouTube.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Document Standards</groupName>
+        <technology>
+            <techName>HTML5 DocType</techName>
+            <description>The DOCTYPE is a required preamble for HTML5 websites.</description>
+        </technology>
+        <technology>
+            <techName>Canonical Content Tag</techName>
+            <description>Public specification of a preferred URL for a page allows search engines to understand the original location for content.</description>
+        </technology>
+        <technology>
+            <techName>HREF Lang</techName>
+            <description>Contains language specific links.</description>
+        </technology>
+        <technology>
+            <techName>Javascript</techName>
+            <description>JavaScript is a scripting language most often used for client-side web development.</description>
+        </technology>
+        <technology>
+            <techName>Open Graph Protocol</techName>
+            <description>The Open Graph protocol enables any web page to become a rich object in a social graph, a open protocol supported by Facebook</description>
+        </technology>
+        <technology>
+            <techName>Meta Description</techName>
+            <description>The description attribute provides a concise explanation of the page content.</description>
+        </technology>
+        <technology>
+            <techName>Twitter Cards</techName>
+            <description>Twitter cards make it possible for you to attach media experiences to Tweets that link to your content.</description>
+        </technology>
+        <technology>
+            <techName>Meta Robot</techName>
+            <description>This page contains a meta robots tag which tells search engines and robots to index or not index the page.</description>
+        </technology>
+        <technology>
+            <techName>Cascading Style Sheets</techName>
+            <description>Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in a markup language. Its most common application is to style web pages written in HTML</description>
+        </technology>
+        <technology>
+            <techName>HTML 5 Specific Tags</techName>
+            <description>This page contains tags that are specific to an HTML 5 implementation.</description>
+        </technology>
+        <technology>
+            <techName>WAI-ARIA</techName>
+            <description>A way to make Web content and Web applications more accessible to people with disabilities. It especially helps with dynamic content and advanced user interface controls developed with Ajax, HTML, JavaScript, and related technologies.</description>
+        </technology>
+        <technology>
+            <techName>IFrame</techName>
+            <description>The page shows content with an iframe; an embedded frame that loads another webpage.</description>
+        </technology>
+        <technology>
+            <techName>Report URI CSP</techName>
+            <description>Report-uri directive instructs the user agent to report attempts to violate the Content Security Policy.</description>
+        </technology>
+        <technology>
+            <techName>Strict Transport Security</techName>
+            <description>The HTTP Strict-Transport-Security (HSTS) header instructs the browser to only use https.</description>
+        </technology>
+        <technology>
+            <techName>HSTS</techName>
+            <description>Forces browsers to only communicate with the site using HTTPS.</description>
+        </technology>
+        <technology>
+            <techName>Content Type Options</techName>
+            <description>Used to disable MIME-sniffing for a particular HTTP response.</description>
+        </technology>
+        <technology>
+            <techName>X-XSS-Protection</techName>
+            <description>X-XSS-Protection is a HTTP header set by Internet Explorer 8+. This header lets domains toggle on and off the "XSS Filter" of IE8, which prevents some categories of XSS attacks.</description>
+        </technology>
+        <technology>
+            <techName>X-Frame-Options</techName>
+            <description>The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render a page in a frame or iframe. Sites can use this to avoid clickjacking attacks, by ensuring that their content is not embedded into other sites.</description>
+        </technology>
+        <technology>
+            <techName>Content Security Policy</techName>
+            <description>Content Security Policy is a computer security concept, to prevent cross-site scripting XSS attacks.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Content Delivery Network</groupName>
+        <technology>
+            <techName>Content Delivery Network</techName>
+            <description>This page contains links that give the impression that some of the site contents are stored on a content delivery network.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Web Master Registration</groupName>
+        <technology>
+            <techName>Naver Webmaster Tools</techName>
+            <description>Korean website verification.</description>
+        </technology>
+    </technologyGroup>
+</techStack>

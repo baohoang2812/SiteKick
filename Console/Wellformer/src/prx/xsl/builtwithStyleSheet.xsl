@@ -8,7 +8,9 @@
         Purpose of transformation follows.
 -->
 
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" 
+                xmlns="www.sitekick.com/tech"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsl:output method="xml" omit-xml-declaration="no"/>
 
     <!-- TODO customize transformation rules 
@@ -21,7 +23,7 @@
                     <xsl:value-of select="//form[@id='mainForm']//div[@class='container'][1]//h1[contains(@class,'text-truncate')]"/>
                 </name>
             </site>
-            <xsl:for-each select="//form[@id='mainForm']//div[@class='container'][2]//*[contains(@class,'col-md-8')]/div">
+            <xsl:for-each select="//form[@id='mainForm']//div[@class='container'][2]//*[contains(@class,'col-md-8')]/div[not(contains(.//h6,'Misleading Technology Profile Warning'))]">
                 <technologyGroup>
                     <groupName>
                         <xsl:value-of select=".//*[contains(@class,'card-title')]"/> 
