@@ -6,8 +6,7 @@
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,8 +15,6 @@ import prx.config.SystemConfig;
 import prx.constant.CommonConstant;
 import prx.parser.BuiltWithParser;
 import prx.parser.AlexaParser;
-import prx.utils.HttpUtils;
-import prx.utils.TextUtils;
 import prx.utils.XMLUtils;
 
 /**
@@ -30,7 +27,11 @@ public class SiteKick {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Set<String> domainSet = parseSite();
+//        Set<String> domainSet = parseSite();
+        Set<String> domainSet = new HashSet();
+        domainSet.add("tuoitre.vn");
+        domainSet.add("kenh14.vn");
+        domainSet.add("steam.com");
         parseBuiltWith(domainSet);
     }
 

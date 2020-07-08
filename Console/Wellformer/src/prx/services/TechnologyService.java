@@ -5,16 +5,16 @@
  */
 package prx.services;
 
-import prx.blo.TechnologyBLO;
+import prx.dao.TechnologyDAO;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
 public class TechnologyService {
-    TechnologyBLO technologyBLO;
+    TechnologyDAO technologyBLO;
 
-    public TechnologyService(TechnologyBLO technologyBLO) {
+    public TechnologyService(TechnologyDAO technologyBLO) {
         this.technologyBLO = technologyBLO;
     }
     

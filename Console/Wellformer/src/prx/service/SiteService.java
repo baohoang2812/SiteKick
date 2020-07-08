@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prx.blo;
-
-import javax.persistence.EntityManager;
+package prx.service;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
-public class TechnologyGroupBLO extends BaseBLO{
-
-    public TechnologyGroupBLO(EntityManager entityManager) {
-        super(entityManager);
-    }
+public class SiteService {
     
 }

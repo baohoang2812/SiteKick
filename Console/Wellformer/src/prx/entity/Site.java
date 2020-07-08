@@ -8,8 +8,11 @@ package prx.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -32,44 +35,33 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Site.findAll", query = "SELECT s FROM Site s")
     , @NamedQuery(name = "Site.findById", query = "SELECT s FROM Site s WHERE s.id = :id")
     , @NamedQuery(name = "Site.findByUrl", query = "SELECT s FROM Site s WHERE s.url = :url")
-    , @NamedQuery(name = "Site.findByFavicon", query = "SELECT s FROM Site s WHERE s.favicon = :favicon")
-    , @NamedQuery(name = "Site.findByDescription", query = "SELECT s FROM Site s WHERE s.description = :description")
     , @NamedQuery(name = "Site.findByGlobalRank", query = "SELECT s FROM Site s WHERE s.globalRank = :globalRank")
-    , @NamedQuery(name = "Site.findByCountryName", query = "SELECT s FROM Site s WHERE s.countryName = :countryName")
-    , @NamedQuery(name = "Site.findByCountryRank", query = "SELECT s FROM Site s WHERE s.countryRank = :countryRank")
-    , @NamedQuery(name = "Site.findByCategoryRank", query = "SELECT s FROM Site s WHERE s.categoryRank = :categoryRank")
-    , @NamedQuery(name = "Site.findByTotalVisit", query = "SELECT s FROM Site s WHERE s.totalVisit = :totalVisit")})
+    , @NamedQuery(name = "Site.findByCountry", query = "SELECT s FROM Site s WHERE s.country = :country")
+    , @NamedQuery(name = "Site.findByCountryRank", query = "SELECT s FROM Site s WHERE s.countryRank = :countryRank")})
 public class Site implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "Id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "Url", length = 1073741823)
     private String url;
-    @Column(name = "Favicon", length = 1073741823)
-    private String favicon;
-    @Column(name = "Description", length = 500)
-    private String description;
     @Column(name = "GlobalRank")
     private Integer globalRank;
-    @Column(name = "CountryName", length = 150)
-    private String countryName;
+    @Column(name = "Country", length = 150)
+    private String country;
     @Column(name = "CountryRank")
     private Integer countryRank;
-    @Column(name = "CategoryRank")
-    private Integer categoryRank;
-    @Column(name = "TotalVisit", length = 200)
-    private String totalVisit;
     @JoinTable(name = "SiteTech", joinColumns = {
         @JoinColumn(name = "SiteId", referencedColumnName = "Id", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "TechnologyId", referencedColumnName = "Id", nullable = false)})
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<Technology> technologyCollection;
     @JoinColumn(name = "CategoryId", referencedColumnName = "Id")
     @ManyToOne
-    private Category category;
+    private Category categoryId;
 
     public Site() {
     }
@@ -94,22 +86,6 @@ public class Site implements Serializable {
         this.url = url;
     }
 
-    public String getFavicon() {
-        return favicon;
-    }
-
-    public void setFavicon(String favicon) {
-        this.favicon = favicon;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Integer getGlobalRank() {
         return globalRank;
     }
@@ -118,12 +94,12 @@ public class Site implements Serializable {
         this.globalRank = globalRank;
     }
 
-    public String getCountryName() {
-        return countryName;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Integer getCountryRank() {
@@ -132,22 +108,6 @@ public class Site implements Serializable {
 
     public void setCountryRank(Integer countryRank) {
         this.countryRank = countryRank;
-    }
-
-    public Integer getCategoryRank() {
-        return categoryRank;
-    }
-
-    public void setCategoryRank(Integer categoryRank) {
-        this.categoryRank = categoryRank;
-    }
-
-    public String getTotalVisit() {
-        return totalVisit;
-    }
-
-    public void setTotalVisit(String totalVisit) {
-        this.totalVisit = totalVisit;
     }
 
     @XmlTransient
@@ -159,12 +119,12 @@ public class Site implements Serializable {
         this.technologyCollection = technologyCollection;
     }
 
-    public Category getCategory() {
-        return category;
+    public Category getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
     }
 
     @Override
@@ -191,5 +151,5 @@ public class Site implements Serializable {
     public String toString() {
         return "prx.entity.Site[ id=" + id + " ]";
     }
-    
+
 }

@@ -5,16 +5,16 @@
  */
 package prx.services;
 
-import prx.blo.CategoryBLO;
+import prx.dao.CategoryDAO;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
 public class CategoryService {
-    CategoryBLO categoryBLO;
+    CategoryDAO categoryBLO;
 
-    public CategoryService(CategoryBLO categoryBLO) {
+    public CategoryService(CategoryDAO categoryBLO) {
         this.categoryBLO = categoryBLO;
     }
     

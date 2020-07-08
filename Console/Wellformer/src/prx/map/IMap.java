@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package prx.blo;
+package prx.map;
 
-import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
-public class TechnologyBLO extends BaseBLO{
-
-    public TechnologyBLO(EntityManager entityManager) {
-        super(entityManager);
-    }
-    
+public interface IMap<S,D> {
+    D map(S jaxbObject);
+    List<D> mapList(List<S> jaxbObjectList);
 }

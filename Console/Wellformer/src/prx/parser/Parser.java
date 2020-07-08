@@ -6,7 +6,6 @@
 package prx.parser;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +15,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import prx.constant.CommonConstant;
+import prx.dao.IGenericDAO;
+import prx.entity.EntityContext;
+import prx.map.IMap;
+import prx.map.SiteMap;
 import prx.utils.HttpUtils;
 import prx.utils.TextUtils;
 import prx.utils.XMLUtils;
@@ -142,20 +145,17 @@ public class Parser {
         return dataList;
     }
 
-    //TODO load To Database JPA
-    protected <T> void loadToDatabase(List<T> dataList) {
-        List<T> result = dataList;
-    }
+//    //TODO load To Database JPA
+//    protected <T> void loadToDatabase(List<T> dataList, IGenericDAO dao, IMap mapper) {
+//        dao.create(mapper.mapList(dataList));
+//    }
 
-    protected <T> void parsePageSet(Class<T> klass, Set<String> linkSet, Transformer transformer) {
+    protected <T> List<T> parsePageSet(Class<T> klass, Set<String> linkSet, Transformer transformer) {
         List<T> dataList = new ArrayList();
         for (String link : linkSet) {
             dataList.addAll(parsePageDetail(link, klass, transformer));
         }
-        // JPA 
-        if (!dataList.isEmpty()) {
-            loadToDatabase(dataList);
-        }
+        return dataList;
     }
 
 }

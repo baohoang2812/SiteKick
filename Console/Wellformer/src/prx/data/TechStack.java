@@ -127,7 +127,7 @@ public class TechStack {
         }
         return this.technologyGroup;
     }
-
+ 
 
     /**
      * <p>Java class for anonymous complex type.

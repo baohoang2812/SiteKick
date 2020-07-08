@@ -7,9 +7,11 @@ package prx.parser;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -21,7 +23,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import prx.config.SystemConfig;
 import prx.constant.CommonConstant;
+import prx.dao.CategoryDAO;
+import prx.dao.IGenericDAO;
+import prx.dao.SiteDAO;
 import prx.data.Site;
+import prx.entity.EntityContext;
+import prx.map.SiteMap;
 import prx.utils.XMLUtils;
 
 /**
@@ -115,11 +122,25 @@ public class AlexaParser extends Parser {
                 retrieveLinks(document, domainXPath, domainSet);
                 //TODO parse Page Details in Category & pass category name to XSL
                 String category = getCategoryName(categoryPath);
+                // insert Category
+                EntityContext context = EntityContext.newInstance();
+                EntityManager em = context.getEntityManager();
+                try {
+                    context.beginTransaction();
+                    CategoryDAO categoryDAO = new CategoryDAO(em);
+                    categoryDAO.createCategory(category);
+                    context.commitTransaction();
+                } catch (Exception e) {
+                    Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
+                    context.rollBackTransaction();
+                }// end insert Category
+
                 // get Transformer
                 Transformer transformer = XMLUtils.getTransformer(xslPath);
                 transformer.setParameter("categoryName", category);
-                parsePageSet(Site.class, pageDetailLinkSet, transformer);
-                pageDetailLinkSet = new HashSet();
+                List<Site> siteList = parsePageSet(Site.class, pageDetailLinkSet, transformer);
+                insertSiteList(siteList);
+                // pageDetailLinkSet = new HashSet();
                 System.out.println("Finish parsing page: " + constructLink(categoryPath));
             } catch (IOException | XPathExpressionException | ParserConfigurationException | SAXException | TransformerConfigurationException e) {
                 System.out.println("!!!Parsing Category Page ERROR!!! " + constructLink(categoryPath));
@@ -155,4 +176,17 @@ public class AlexaParser extends Parser {
         System.out.println("================================================");
     }
 
+    private void insertSiteList(List<Site> siteList) {
+        EntityContext context = EntityContext.newInstance();
+        try {
+            SiteDAO siteDAO = new SiteDAO(context.getEntityManager());
+            context.beginTransaction();
+            SiteMap siteMap = new SiteMap();
+            List<prx.entity.Site> entityList = siteMap.mapList(siteList);
+            siteDAO.create(entityList);
+        } catch (Exception e) {
+            Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
+            context.rollBackTransaction();
+        }
+    }
 }

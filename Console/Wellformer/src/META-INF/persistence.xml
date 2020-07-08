@@ -3,8 +3,8 @@
   <persistence-unit name="CrawlerPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>prx.entity.Category</class>
-    <class>prx.entity.Technology</class>
     <class>prx.entity.Site</class>
+    <class>prx.entity.Technology</class>
     <class>prx.entity.TechnologyGroup</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SiteKick"/>
