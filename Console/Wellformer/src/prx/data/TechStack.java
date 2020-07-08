@@ -215,7 +215,6 @@ public class TechStack {
      * 
      * 
      */
-    
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "groupName",

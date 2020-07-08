@@ -6,7 +6,12 @@
 package prx.parser;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import prx.data.TechStack;
+import prx.utils.XMLUtils;
 
 /**
  *
@@ -30,13 +35,19 @@ public class BuiltWithParser extends Parser {
     public void setLinkSet(Set<String> domainSet) {
         this.domainSet = domainSet;
     }
-    
 
     @Override
     public void parse() {
         System.out.println("================================================");
         System.out.println("Parsing " + baseURL + " . . .");
-        parsePageSet(TechStack.class, domainSet);
+        //config transformer
+        Transformer transformer = null;
+        try {
+            transformer = XMLUtils.getTransformer(xslPath);
+        } catch (TransformerConfigurationException e) {
+            Logger.getLogger(BuiltWithParser.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+        parsePageSet(TechStack.class, domainSet, transformer);
         System.out.println("Finish parsing " + baseURL);
         System.out.println("================================================");
     }

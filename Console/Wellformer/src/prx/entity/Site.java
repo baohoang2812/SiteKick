@@ -69,7 +69,7 @@ public class Site implements Serializable {
     private Collection<Technology> technologyCollection;
     @JoinColumn(name = "CategoryId", referencedColumnName = "Id")
     @ManyToOne
-    private Category categoryId;
+    private Category category;
 
     public Site() {
     }
@@ -159,12 +159,12 @@ public class Site implements Serializable {
         this.technologyCollection = technologyCollection;
     }
 
-    public Category getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override

@@ -9,7 +9,7 @@
 -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" 
-                xmlns="www.sitekick.com/tech"
+                xmlns="http://www.sitekick.com"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsl:output method="xml" omit-xml-declaration="no"/>
 

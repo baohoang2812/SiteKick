@@ -36,4 +36,6 @@ public class CommonConstant {
 
     public static final String HTTPS_PROTOCOL = "https";
 
+    public static final int POSITION_GAP = 1;
+
 }

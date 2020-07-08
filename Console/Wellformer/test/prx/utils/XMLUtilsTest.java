@@ -5,14 +5,17 @@
  */
 package prx.utils;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import prx.config.SystemConfig;
+import prx.data.Site;
+import prx.data.TechStack;
 
 /**
  *
@@ -68,41 +71,70 @@ public class XMLUtilsTest {
      */
     @Test
     public void testGenerateClass() throws Exception {
-        System.out.println("Test Generate Class");
-        String packageName = "data";
-        String builtWithXsdPath = "src/prx/schema/builtwithSchema.xsd";
-        String similarWebXsdPath = "src/prx/schema/siteSchema.xsd";
-        File builtWithSchemaFile = new File(builtWithXsdPath);
-        File similarWebSchemaFile = new File(similarWebXsdPath);
-        String outputPath = "src/prx/";
-        XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
-        XMLUtils.generateClass(packageName, similarWebSchemaFile, outputPath);
+//        System.out.println("Test Generate Class");
+//        String packageName = "prx.data";
+//        String builtWithXsdPath = "src/prx/schema/builtwithSchema.xsd";
+//        String similarWebXsdPath = "src/prx/schema/siteSchema.xsd";
+//        File builtWithSchemaFile = new File(builtWithXsdPath);
+//        File similarWebSchemaFile = new File(similarWebXsdPath);
+//        String outputPath = "src/";
+//        XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
+//        XMLUtils.generateClass(packageName, similarWebSchemaFile, outputPath);
     }
 
     /**
      * Test of unmarshall method, of class XMLUtils.
      */
     @Test
-    public void testUnmarshall() throws Exception {
-//        System.out.println("unmarshall");
-//        Object expResult = null;
-////        Object result = XMLUtils.unmarshall(null);
-////        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void testUnmarshall_Site() throws Exception {
+        System.out.println("Test XML Unmarshall Alexa");
+        String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn");
+        pageContent = TextUtils.refineHtml(pageContent);
+        Transformer transformer = XMLUtils.getTransformer(SystemConfig.SITE_XSL_PATH);
+        transformer.setParameter("categoryName", "News");
+        String xml = XMLUtils.transformFromString(transformer, pageContent);
+        String xsdPath = SystemConfig.SITE_XSD_PATH;
+        boolean validate = XMLUtils.isXMLValidate(xsdPath, xml);
+        if (validate) {
+            try {
+                Site site = XMLUtils.unmarshall(Site.class, xml);
+                assertNotEquals(site, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+                PrintWriter pw = new PrintWriter("src/test/alexa_detail_test" + ".xml");
+                pw.print(pageContent);
+                pw.close();
+                fail("Unmarshall Exception");
+            }
+        } else {
+            PrintWriter pw = new PrintWriter("src/test/alexa_detail_test" + ".xml");
+            pw.print(pageContent);
+            pw.close();
+            fail("Not validate");
+        }
     }
 
     /**
      * Test of marshall method, of class XMLUtils.
      */
     @Test
-    public void testMarshall() throws Exception {
-//        System.out.println("marshall");
-//        Object obj = null;
-//        File xmlFile = null;
-//        XMLUtils.marshall(obj, xmlFile);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void testMarshall_BuiltWith() throws Exception {
+        System.out.println("Test XML Unmarshall BuiltWith");
+        String pageContent = HttpUtils.getContent("https://builtwith.com/tuoitre.vn");
+        pageContent = TextUtils.refineHtml(pageContent);
+        Transformer transformer = XMLUtils.getTransformer(SystemConfig.TECH_XSL_PATH);
+        String xml = XMLUtils.transformFromString(transformer, pageContent);
+        String xsdPath = SystemConfig.TECH_XSD_PATH;
+        boolean validate = XMLUtils.isXMLValidate(xsdPath, xml);
+        if (validate) {
+            TechStack techStack = XMLUtils.unmarshall(TechStack.class, xml);
+            assertNotEquals(techStack, null);
+        } else {
+            PrintWriter pw = new PrintWriter("src/test/builtwith_detail_test" + ".xml");
+            pw.print(pageContent);
+            pw.close();
+            fail("Not validate");
+        }
     }
 
     /**
@@ -158,24 +190,27 @@ public class XMLUtilsTest {
     }
 
     @Test
-    public void testIsXMLValidate_BuiltWith_StringInput() throws IOException, TransformerException {
-        System.out.println("Test XML Validate Similar Web");
-        String pageContent = HttpUtils.getContent("https://builtwith.com/bilibili.com");
+    public void testIsXMLValidate_Alexa_StringInput() throws IOException, TransformerException {
+        System.out.println("Test XML Validate Alexa");
+        String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn");
         pageContent = TextUtils.refineHtml(pageContent);
-        String xml = XMLUtils.transformFromString(SystemConfig.TECH_XSL_PATH, pageContent);
-        String xsdPath = "src/prx/schema/builtwithSchema.xsd";
+        Transformer transformer = XMLUtils.getTransformer(SystemConfig.SITE_XSL_PATH);
+        transformer.setParameter("categoryName", "News");
+        String xml = XMLUtils.transformFromString(transformer, pageContent);
+        String xsdPath = "src/prx/schema/siteSchema.xsd";
         boolean expResult = true;
         boolean result = XMLUtils.isXMLValidate(xsdPath, xml);
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testIsXMLValidate_SimilarWeb_StringInput() throws IOException, TransformerException {
+    public void testIsXMLValidate_BuiltWith_StringInput() throws IOException, TransformerException {
         System.out.println("Test XML Validate Similar Web");
-        String pageContent = HttpUtils.getContent("https://www.similarweb.com/website/bilibili.com");
+        String pageContent = HttpUtils.getContent("https://builtwith.com/bilibili.com");
         pageContent = TextUtils.refineHtml(pageContent);
-        String xml = XMLUtils.transformFromString(SystemConfig.SITE_XSL_PATH, pageContent);
-        String xsdPath = "src/prx/schema/siteSchema.xsd";
+        Transformer transformer = XMLUtils.getTransformer(SystemConfig.TECH_XSL_PATH);
+        String xml = XMLUtils.transformFromString(transformer, pageContent);
+        String xsdPath = "src/prx/schema/builtwithSchema.xsd";
         boolean expResult = true;
         boolean result = XMLUtils.isXMLValidate(xsdPath, xml);
         assertEquals(expResult, result);

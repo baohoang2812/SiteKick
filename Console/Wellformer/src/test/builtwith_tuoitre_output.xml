@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?><techStack xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="www.sitekick.com/tech">
+    <site>
+        <name>TUOITRE.VN</name>
+    </site>
+    <technologyGroup>
+        <groupName>Analytics and Tracking</groupName>
+        <technology>
+            <techName>Google Analytics</techName>
+            <description>Google Analytics offers a host of compelling features and
+                benefits for everyone from senior executives and advertising and marketing
+                professionals to site owners and content developers.</description>
+        </technology>
+        <technology>
+            <techName>Facebook Pixel</techName>
+            <description>Facebook Pixel is Facebooks conversion tracking system
+                for ads on Facebook to websites.</description>
+        </technology>
+        <technology>
+            <techName>Facebook Domain Insights</techName>
+            <description>This website contains tracking information that allows
+                admins to see Facebook Insights out of Facebook to this domain.</description>
+        </technology>
+        <technology>
+            <techName>Global Site Tag</techName>
+            <description>Google's primary tag for Google Measurement/Conversion
+                Tracking, Adwords and DoubleClick.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Widgets</groupName>
+        <technology>
+            <techName>Facebook Like</techName>
+            <description>Allows users to Like items they find on the web, similar
+                to how you Like items within Facebook.</description>
+        </technology>
+        <technology>
+            <techName>Facebook Like Box</techName>
+            <description>The use of a fan page Like box Facebook page integration.
+            </description>
+        </technology>
+        <technology>
+            <techName>Font Awesome</techName>
+            <description>Iconic font and CSS toolkit.</description>
+        </technology>
+        <technology>
+            <techName>reCAPTCHA</techName>
+            <description>Anti-bot CAPTCHA widget from Google.</description>
+        </technology>
+        <technology>
+            <techName>Getty Images</techName>
+            <description>This website has images that may have been sourced from
+                Getty Images.</description>
+        </technology>
+        <technology>
+            <techName>Google Tag Manager</techName>
+            <description>Tag management that lets you add and update website tags
+                without changes to underlying website code.</description>
+        </technology>
+        <technology>
+            <techName>Google Font API</techName>
+            <description>The Google Font API helps you add web fonts to any web
+                page.</description>
+        </technology>
+        <technology>
+            <techName>Facebook Sharer</techName>
+            <description>Share this page on Facebook using a deprecated sharing
+                syntax.</description>
+        </technology>
+        <technology>
+            <techName>COVID-19</techName>
+            <description>This website mentions COVID-19 / Novel Coronavirus.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Frameworks</groupName>
+        <technology>
+            <techName>Shockwave Flash Embed</techName>
+            <description>Adobe Flash Macromedia shockwave content. End of life
+                product retiring in 2020.</description>
+        </technology>
+        <technology>
+            <techName>ASP.NET</techName>
+            <description>ASP.NET is a web application framework marketed by
+                Microsoft that programmers can use to build dynamic web sites, web applications
+                and XML web services. It is part of Microsoft's .NET platform and is the
+                successor to Microsoft's Active Server Pages (ASP) technology.</description>
+        </technology>
+        <technology>
+            <techName>OpenResty</techName>
+            <description>Application server and framework system.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Mobile</groupName>
+        <technology>
+            <techName>Apple Mobile Web App Capable</techName>
+            <description>Launches a web application for Safari on iOS in
+                full-screen mode to look like a native application.</description>
+        </technology>
+        <technology>
+            <techName>IPhone / Mobile Compatible</techName>
+            <description>The website contains code that allows the page to support
+                IPhone / Mobile Content.</description>
+        </technology>
+        <technology>
+            <techName>Viewport Meta</techName>
+            <description>This page uses the viewport meta tag which means the
+                content may be optimized for mobile content.</description>
+        </technology>
+        <technology>
+            <techName>Mobile Non Scaleable Content</techName>
+            <description>This content is formatted for mobile devices, it does not
+                allow the content to be scaled.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Payment</groupName>
+        <technology>
+            <techName>Japanese Yen</techName>
+            <description>The website uses the � symbol on its website - meaning it
+                may accept payment in this Japanese currency.</description>
+        </technology>
+        <technology>
+            <techName>Pound Sterling</techName>
+            <description>The website uses the � symbol on its website - meaning it
+                may accept payment in this British currency.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Audio / Video Media</groupName>
+        <technology>
+            <techName>JW
+                Player</techName>
+            <description>The JW Player has evolved through the history of online
+                video since the time Jeroen wrote the first version in 2005. The experience we
+                have developed over those years are built into the JW Player.</description>
+        </technology>
+        <technology>
+            <techName>VideoJS</techName>
+            <description>VideoJS is an HTML5 Video Player, built with Javascript
+                and CSS, with a fallback to a Flash video player for when the browser doesn't
+                support HTML5 video. Owned by Brightcove.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>JavaScript Libraries and Functions</groupName>
+        <technology>
+            <techName>bxSlider</techName>
+            <description>Response jQuery Content Slider</description>
+        </technology>
+        <technology>
+            <techName>Google API</techName>
+            <description>The website uses some form of Google APIs to provide
+                interaction with the many API's Google Providers.</description>
+        </technology>
+        <technology>
+            <techName>jQuery</techName>
+            <description>JQuery is a fast, concise, JavaScript Library that
+                simplifies how you traverse HTML documents, handle events, perform animations,
+                and add Ajax interactions to your web pages. jQuery is designed to change the
+                way that you write JavaScript.</description>
+        </technology>
+        <technology>
+            <techName>jQuery UI</techName>
+            <description>jQuery UI provides abstractions for low-level interaction
+                and animation, advanced effects and high-level, themeable widgets, built on top
+                of the jQuery JavaScript Library, that you can use to build highly interactive
+                web applications.</description>
+        </technology>
+        <technology>
+            <techName>jQuery Easing</techName>
+            <description>A jQuery extension that provides functionality to "ease"
+                things onto or off of the screen.</description>
+        </technology>
+        <technology>
+            <techName>Fancybox</techName>
+            <description>FancyBox is a tool for displaying images, html content
+                and multi-media in a Mac-style "lightbox" that floats overtop of web page.</description>
+        </technology>
+        <technology>
+            <techName>html5shiv</techName>
+            <description>HTML5 IE enabling script shim.</description>
+        </technology>
+        <technology>
+            <techName>Facebook SDK</techName>
+            <description>JavaScript SDK enables you to access all of the features
+                of the Graph API via JavaScript, and it provides a rich set of client-side
+                functionality for authentication and sharing. It differs from Facebook Connect.
+            </description>
+        </technology>
+        <technology>
+            <techName>Facebook for Websites</techName>
+            <description>Allows a user to make a website more sociable and
+                connected with integrations from the hugely popular Facebook website.</description>
+        </technology>
+        <technology>
+            <techName>core-js</techName>
+            <description>Modular standard library for JavaScript.</description>
+        </technology>
+        <technology>
+            <techName>HTML5 History API</techName>
+            <description>A standardized way to manipulate the browser history via
+                script.</description>
+        </technology>
+        <technology>
+            <techName>Pikaday</techName>
+            <description>A refreshing JavaScript Datepicker.</description>
+        </technology>
+        <technology>
+            <techName>es6 promise</techName>
+            <description>A polyfill for ES6-style Promises.</description>
+        </technology>
+        <technology>
+            <techName>CreateJS</techName>
+            <description>A suite of modular libraries and tools which work
+                together or independently to enable interactive content on open web technologies
+                via HTML5.</description>
+        </technology>
+        <technology>
+            <techName>Raven JS</techName>
+            <description>Raven.js is the official browser JavaScript client for
+                Sentry.</description>
+        </technology>
+        <technology>
+            <techName>Bootstrap.js</techName>
+            <description>Twitter Bootstrap JS components.</description>
+        </technology>
+        <technology>
+            <techName>Slick JS</techName>
+            <description>Fully responsive carousel library.</description>
+        </technology>
+        <technology>
+            <techName>Magnific Popup</techName>
+            <description>Magnific Popup is a responsive lightbox &amp; dialog
+                script.</description>
+        </technology>
+        <technology>
+            <techName>Handlebars</techName>
+            <description>Handlebars provides the power necessary to let you build
+                semantic templates effectively with no frustration.</description>
+        </technology>
+        <technology>
+            <techName>lodash</techName>
+            <description>Lo-dash is an alternative and a drop-in replacement for
+                Underscore.js.</description>
+        </technology>
+        <technology>
+            <techName>fullPage.js</techName>
+            <description>Fullscreen Scrolling Websites Library.</description>
+        </technology>
+        <technology>
+            <techName>TweenMax</techName>
+            <description>Provides a single JavaScript file that contains
+                everything you will commonly need for animating DOM elements:</description>
+        </technology>
+        <technology>
+            <techName>Vue</techName>
+            <description>vue.js a JavaScript MVVM framework.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Advertising</groupName>
+        <technology>
+            <techName>DoubleClick.Net</techName>
+            <description>DoubleClick enables agencies, marketers and publishers to
+                work together successfully and profit from their digital marketing investments.
+            </description>
+        </technology>
+        <technology>
+            <techName>Google Publisher Tag</techName>
+            <description>Google Publisher Tag (GPT) is an ad tagging format that
+                provides benefits and improvements over the DART tag.</description>
+        </technology>
+        <technology>
+            <techName>Facebook Custom Audiences</techName>
+            <description>Custom Audiences from your website makes it possible to
+                reach people who visit your website and deliver the right message to them on
+                Facebook.</description>
+        </technology>
+        <technology>
+            <techName>Ads.txt</techName>
+            <description>A public record of Authorized Digital Sellers for a
+                website.</description>
+        </technology>
+        <technology>
+            <techName>Google Direct</techName>
+            <description>Website is a direct publisher for Google ad content.</description>
+        </technology>
+        <technology>
+            <techName>Adform Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Adform ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>AOL
+                Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control AOL ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>AppNexus Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control AppNexus ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>ContextWeb Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control ContextWeb ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Google Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Google ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>PubMatic Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control PubMatic ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>SmartAdServer Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control SmartAdServer ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>FreeWheel Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control FreeWheel ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>IndexExchange Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control IndexExchange ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>DistrictM Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control DistictM ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>RubiconProject Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control RubiconProject ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Teads Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Teads ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>OpenX Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control OpenX ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Sovrn Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Sovrn ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>ORC International Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control ORC International ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>DistrictM Direct</techName>
+            <description>Website is a direct publisher for DistictM ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>RubiconProject Direct</techName>
+            <description>Website is a direct publisher for RubiconProject ad
+                content.</description>
+        </technology>
+        <technology>
+            <techName>Beachfront Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Beachfront ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>SpotXChange Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control SpotXChange ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Comet Cox Media Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Comet Cox Media ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>PubMatic Direct</techName>
+            <description>Website is a direct publisher for PubMatic ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>AOL
+                Direct</techName>
+            <description>Website is a direct publisher for AOL ad content.</description>
+        </technology>
+        <technology>
+            <techName>Google Remarketing</techName>
+            <description>Google code specifically for remarketing/retargeting
+                based advertising.</description>
+        </technology>
+        <technology>
+            <techName>Lijit Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Lijit ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>GumGum Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control GumGum ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>SpringServe Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control SpringServe ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Tremor Video Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Tremor Video ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>BrightRoll Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control BrightRoll ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>StreamRail Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control StreamRail ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Cedato Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Cedato ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Fyber Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Fyber ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>LKQD
+                Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control LKQD ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Improve Digital Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Improve Digital ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>AppNexus Direct</techName>
+            <description>Website is a direct publisher for AppNexus ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>OpenX
+                Direct</techName>
+            <description>Website is a direct publisher for OpenX ad content.</description>
+        </technology>
+        <technology>
+            <techName>Sovrn
+                Direct</techName>
+            <description>Website is a direct publisher for Sovrn ad content.</description>
+        </technology>
+        <technology>
+            <techName>Lijit
+                Direct</techName>
+            <description>Website is a direct publisher for Lijit ad content.</description>
+        </technology>
+        <technology>
+            <techName>ContextWeb Direct</techName>
+            <description>Website is a direct publisher for ContextWeb ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>Ad
+                Asia</techName>
+            <description>Advertising company from Asia.</description>
+        </technology>
+        <technology>
+            <techName>WideOrbit Reseller</techName>
+            <description>Website is a reseller publisher for WideOrbit ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>RTB House Reseller</techName>
+            <description>Website is a reseller publisher for RTB House ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>Admixer Reseller</techName>
+            <description>Website is a reseller publisher for Admixer ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>Connectad Direct</techName>
+            <description>Website is a direct publisher for Connectad ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>adtelligent Reseller</techName>
+            <description>Website is a reseller publisher for adtelligent ad
+                content</description>
+        </technology>
+        <technology>
+            <techName>MemeVideo Direct</techName>
+            <description>Website is a direct publisher for MemeVideo ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>RhythmOne Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control RhythmOne ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Xapads Direct</techName>
+            <description>Website is a direct publisher for Xapads ad content</description>
+        </technology>
+        <technology>
+            <techName>Criteo Direct</techName>
+            <description>Website is a direct publisher for Criteo ad content.</description>
+        </technology>
+        <technology>
+            <techName>pixfuture Direct</techName>
+            <description>Website is a direct publisher for pixfuture ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>Cedato Direct</techName>
+            <description>Website is a direct publisher for Cedato ad content.</description>
+        </technology>
+        <technology>
+            <techName>adstir Direct</techName>
+            <description>Website is a direct publisher for adstir ad content</description>
+        </technology>
+        <technology>
+            <techName>AdAsia Direct</techName>
+            <description>Website is a direct publisher for AdAsia ad content</description>
+        </technology>
+        <technology>
+            <techName>Gamma SSP Direct</techName>
+            <description>Website is a direct publisher for Gamma SSP ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>FreeWheel Direct</techName>
+            <description>Website is a direct publisher for FreeWheel ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>IndexExchange Direct</techName>
+            <description>Website is a direct publisher for IndexExchange ad
+                content.</description>
+        </technology>
+        <technology>
+            <techName>LoopMe Direct</techName>
+            <description>Website is a direct publisher for LoopMe ad content.</description>
+        </technology>
+        <technology>
+            <techName>RhythmOne Direct</techName>
+            <description>Website is a direct publisher for RhythmOne ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>Smartclip Direct</techName>
+            <description>Website is a direct publisher for Smartclip ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>SpotXChange Direct</techName>
+            <description>Website is a direct publisher for SpotXChange ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>Tremor Video Direct</techName>
+            <description>Website is a direct publisher for Tremor Video ad
+                content.</description>
+        </technology>
+        <technology>
+            <techName>Yieldmo Direct</techName>
+            <description>Website is a direct publisher for Yieldmo ad content.</description>
+        </technology>
+        <technology>
+            <techName>OneTag Direct</techName>
+            <description>Website is a direct publisher for OneTag ad content</description>
+        </technology>
+        <technology>
+            <techName>Triple Lift Direct</techName>
+            <description>Website is a direct publisher for Triple Lift ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>33 Across Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control 33 Across ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>Primis Direct</techName>
+            <description>Website is a direct publisher for Primis ad content</description>
+        </technology>
+        <technology>
+            <techName>Bidtellect Reseller</techName>
+            <description>Website is a reseller publisher for Bidtellect ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>Synacor Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Synacor ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>LoopMe Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control LoopMe ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>33 Across Direct</techName>
+            <description>Website is a direct publisher for 33 Across ad content.
+            </description>
+        </technology>
+        <technology>
+            <techName>Sonobi Reseller</techName>
+            <description>The website owner has authorized another entity to
+                control Sonobi ads on this site.</description>
+        </technology>
+        <technology>
+            <techName>ORC International Direct</techName>
+            <description>Website is a direct publisher for ORC International ad
+                content.</description>
+        </technology>
+        <technology>
+            <techName>Sonobi Direct</techName>
+            <description>Website is a direct publisher for Sonobi ad content.</description>
+        </technology>
+        <technology>
+            <techName>Consumable Direct</techName>
+            <description>Website is a direct publisher for Consumable ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>GroundTruth Reseller</techName>
+            <description>Website is a reseller publisher for GroundTruth ad
+                content</description>
+        </technology>
+        <technology>
+            <techName>AvantisVideo Direct</techName>
+            <description>Website is a direct publisher for AvantisVideo ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>OneTag Reseller</techName>
+            <description>Website is a reseller publisher for OneTag ad content</description>
+        </technology>
+        <technology>
+            <techName>The MediaGrid Reseller</techName>
+            <description>Supply curation and management tools for programmatic
+                media buyers and sellers.</description>
+        </technology>
+        <technology>
+            <techName>Aniview Reseller</techName>
+            <description>Website is a reseller publisher for Aniview ad content
+            </description>
+        </technology>
+        <technology>
+            <techName>Vidazoo Direct</techName>
+            <description>Website is a direct publisher for Vidazoo ad content</description>
+        </technology>
+        <technology>
+            <techName>Telaria Reseller</techName>
+            <description>Telaria Reseller Ads.</description>
+        </technology>
+        <technology>
+            <techName>Streamlyn Media Direct</techName>
+            <description>Website is a direct publisher for Streamlyn Media ad
+                content</description>
+        </technology>
+        <technology>
+            <techName>Sekindo Direct</techName>
+            <description>Website is a direct publisher for Sekindo ad content.</description>
+        </technology>
+        <technology>
+            <techName>Imonomy Direct</techName>
+            <description>Website is a direct publisher for Imonomy ad content</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>SSL Certificates</groupName>
+        <technology>
+            <techName>Comodo PositiveSSL</techName>
+            <description>Comodo Positive SSL certificate.</description>
+        </technology>
+        <technology>
+            <techName>Comodo PositiveSSL Wildcard</techName>
+            <description>Wildcard certificate from Comodo.</description>
+        </technology>
+        <technology>
+            <techName>Comodo
+                SSL</techName>
+            <description>Certificate provided by Comodo.</description>
+        </technology>
+        <technology>
+            <techName>SSL
+                by Default</techName>
+            <description>The website redirects traffic to an HTTPS/SSL version by
+                default.</description>
+        </technology>
+        <technology>
+            <techName>Sectigo SSL</techName>
+            <description>SSL from Sectigo formerly Comodo.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Web Hosting Providers</groupName>
+        <technology>
+            <techName>Vietnam Post</techName>
+            <description>Network infrastructure from Vietnam Post based in
+                Vietnam.</description>
+        </technology>
+        <technology>
+            <techName>VNPT</techName>
+            <description>Vietnamese post and telecoms group.</description>
+        </technology>
+        <technology>
+            <techName>FPT Telecom</techName>
+            <description>Vietnam telecoms company.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Syndication Techniques</groupName>
+        <technology>
+            <techName>RSS</techName>
+            <description>A family of web feed formats used to publish frequently
+                updated content such as blog entries, news headlines or podcasts.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Web Master Registration</groupName>
+        <technology>
+            <techName>Google Webmaster</techName>
+            <description>Webmaster tools provide you with a free and easy way to
+                make your site more Google-friendly.</description>
+        </technology>
+        <technology>
+            <techName>MSN/Bing Webmaster</techName>
+            <description>Site registered at MSN/Bing Webmaster.</description>
+        </technology>
+    </technologyGroup>
+    <technologyGroup>
+        <groupName>Content Delivery Network</groupName>
+        <technology>
+            <techName>Content Delivery Network</techName>
+            <description>This page contains links that give the impression that
+                some of the site contents are stored on a content delivery network.</description>
+        </technology>
+    </technologyGroup>
+</techStack>

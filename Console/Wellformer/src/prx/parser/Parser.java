@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import prx.constant.CommonConstant;
 import prx.utils.HttpUtils;
@@ -90,13 +91,12 @@ public class Parser {
     }
 
     public String preprocessPageContent(String url) throws IOException {
-        String pageContent = null;
-        pageContent = HttpUtils.getContent(url);
+        String pageContent = HttpUtils.getContent(url);
         return TextUtils.refineHtml(pageContent);
     }
 
     public String constructLink(String param) {
-        String navPath = getSlashPrefixPath(navigationPath);
+        String navPath = isNullOrEmpty(navigationPath) ? CommonConstant.EMPTY : getSlashPrefixPath(navigationPath);
         String paramPath = isNullOrEmpty(param) ? CommonConstant.EMPTY : getSlashPrefixPath(param);
         String result = baseURL + navPath + paramPath;
         result = result.replaceAll(CommonConstant.UNDERSCORE_STRING, CommonConstant.HYPHEN_STRING);
@@ -115,13 +115,13 @@ public class Parser {
         return null == path || path.isEmpty();
     }
 
-    protected <T> List<T> parsePageDetail(String link, Class<T> klass) {
-        System.out.println("Parsing Page " + baseURL + " Detail");
+    protected <T> List<T> parsePageDetail(String link, Class<T> klass, Transformer transformer) {
+        System.out.println("Parsing Page Detail" + constructLink(link));
         List<T> dataList = new ArrayList();
         try {
             String content = preprocessPageContent(constructLink(link));
             // Transform
-            String xmlContent = XMLUtils.transformFromString(xslPath, content);
+            String xmlContent = XMLUtils.transformFromString(transformer, content);
             // Validate XML with Schema
             boolean isValid = XMLUtils.isXMLValidate(xsdPath, xmlContent);
             // JAXB
@@ -147,14 +147,14 @@ public class Parser {
         List<T> result = dataList;
     }
 
-    protected <T> void parsePageSet(Class<T> klass, Set<String> linkSet) {
-        List<T> dataList = null;
+    protected <T> void parsePageSet(Class<T> klass, Set<String> linkSet, Transformer transformer) {
+        List<T> dataList = new ArrayList();
         for (String link : linkSet) {
-            dataList = parsePageDetail(link, klass);
-            // JPA 
-            if (null != dataList && !dataList.isEmpty()) {
-                loadToDatabase(dataList);
-            }
+            dataList.addAll(parsePageDetail(link, klass, transformer));
+        }
+        // JPA 
+        if (!dataList.isEmpty()) {
+            loadToDatabase(dataList);
         }
     }
 

@@ -6,9 +6,9 @@
 package prx.utils;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 
@@ -28,13 +28,19 @@ public class HttpUtilsTest {
     public void testGetContent() throws IOException {
         String result = null;
         List<String> urls = new ArrayList();
-        urls.add("https://www.similarweb.com/top-websites/category/finance/insurance");
-        urls.add("https://www.similarweb.com/top-websites/category/hobbies-and-leisure/photography");
+        urls.add("https://www.alexa.com/topsites/category/Top/Home");
         for (String link : urls) {
             result = HttpUtils.getContent(link);
             result = TextUtils.refineHtml(result);
+            boolean isWellform=XMLUtils.isWellformXML(result);
+            PrintWriter pw = new PrintWriter("src/test/alexa_category" + ".html");
+            pw.print(result);
+            pw.close();
             if (null == result || result.isEmpty()) {
                 fail("GET Content Failed!!");
+            }
+            if(!isWellform){
+                fail("Not Well form");
             }
         }
     }

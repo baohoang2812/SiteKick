@@ -9,12 +9,14 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.tools.xjc.api.S2JJAXBModel;
 import com.sun.tools.xjc.api.SchemaCompiler;
 import com.sun.tools.xjc.api.XJC;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
+import org.eclipse.persistence.internal.oxm.ByteArraySource;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -23,13 +25,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Templates;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -38,13 +34,8 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-import org.eclipse.persistence.internal.oxm.ByteArraySource;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -120,21 +111,23 @@ public class XMLUtils {
         transformer.transform(xmlFile, output);
     }
 
-    public static String transformFromString(String xslPath, String content)
-            throws IOException, TransformerConfigurationException, TransformerException {
+    public static String transformFromString(Transformer transformer, String content)
+            throws IOException, TransformerException {
         StringReader reader = new StringReader(content);
         StringWriter writer = new StringWriter();
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        StreamSource xslFile = new StreamSource(xslPath);
-        Templates template = transformerFactory.newTemplates(xslFile);
-        Transformer transformer = template.newTransformer();
         StreamSource source = new StreamSource(reader);
         StreamResult output = new StreamResult(writer);
         transformer.transform(source, output);
         return writer.toString();
     }
 
-    // TODO check validate from String not path
+    public static Transformer getTransformer(String xslPath) throws TransformerConfigurationException {
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        StreamSource xslFile = new StreamSource(xslPath);
+        Templates template = transformerFactory.newTemplates(xslFile);
+        return template.newTransformer();
+    }
+
     public static boolean isXMLValidateFromFilePath(String xsdPath, String xmlPath) {
         try {
             SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

@@ -18,9 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="favicon" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="url" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="globalRank" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="country" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="countryRank" type="{http://www.w3.org/2001/XMLSchema}int"/>
@@ -29,14 +27,12 @@ import javax.xml.bind.annotation.XmlType;
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
  *           &lt;/complexType>
  *         &lt;/element>
- *         &lt;element name="categoryRank" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="totalVisit" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -47,58 +43,23 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "favicon",
     "url",
-    "description",
     "globalRank",
     "country",
     "countryRank",
-    "category",
-    "categoryRank",
-    "totalVisit"
+    "category"
 })
 @XmlRootElement(name = "site")
 public class Site {
 
     @XmlElement(required = true)
-    protected String favicon;
-    @XmlElement(required = true)
     protected String url;
-    @XmlElement(required = true)
-    protected String description;
     protected int globalRank;
     @XmlElement(required = true)
     protected String country;
     protected int countryRank;
     @XmlElement(required = true)
     protected Site.Category category;
-    protected int categoryRank;
-    @XmlElement(required = true)
-    protected String totalVisit;
-
-    /**
-     * Gets the value of the favicon property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFavicon() {
-        return favicon;
-    }
-
-    /**
-     * Sets the value of the favicon property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFavicon(String value) {
-        this.favicon = value;
-    }
 
     /**
      * Gets the value of the url property.
@@ -122,30 +83,6 @@ public class Site {
      */
     public void setUrl(String value) {
         this.url = value;
-    }
-
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
     }
 
     /**
@@ -228,46 +165,6 @@ public class Site {
         this.category = value;
     }
 
-    /**
-     * Gets the value of the categoryRank property.
-     * 
-     */
-    public int getCategoryRank() {
-        return categoryRank;
-    }
-
-    /**
-     * Sets the value of the categoryRank property.
-     * 
-     */
-    public void setCategoryRank(int value) {
-        this.categoryRank = value;
-    }
-
-    /**
-     * Gets the value of the totalVisit property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTotalVisit() {
-        return totalVisit;
-    }
-
-    /**
-     * Sets the value of the totalVisit property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTotalVisit(String value) {
-        this.totalVisit = value;
-    }
-
 
     /**
      * <p>Java class for anonymous complex type.
@@ -279,7 +176,7 @@ public class Site {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -294,7 +191,6 @@ public class Site {
     })
     public static class Category {
 
-        @XmlElement(required = true)
         protected String name;
 
         /**
