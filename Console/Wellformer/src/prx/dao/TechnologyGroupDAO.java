@@ -13,7 +13,7 @@ import prx.entity.TechnologyGroup;
  *
  * @author Gia Bảo Hoàng
  */
-public class TechnologyGroupDAO extends BaseDAO {
+public class TechnologyGroupDAO extends BaseDAO<TechnologyGroup, Integer> {
 
     public TechnologyGroupDAO(EntityManager entityManager) {
         super(entityManager, TechnologyGroup.class);

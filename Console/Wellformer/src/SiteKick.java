@@ -53,6 +53,7 @@ public class SiteKick {
         builtWithParser.setBaseURL(SystemConfig.BUILT_WITH_BASE_URL);
         builtWithParser.setXsdPath(SystemConfig.TECH_XSD_PATH);
         builtWithParser.setXslPath(SystemConfig.TECH_XSL_PATH);
+        //TODO remove navigation Path on empty or null
         builtWithParser.setNavigationPath(CommonConstant.EMPTY);
         builtWithParser.setLinkSet(domainSet);
         builtWithParser.parse();

@@ -5,9 +5,7 @@
  */
 package prx.map;
 
-import prx.dao.TechnologyGroupDAO;
 import prx.data.TechStack;
-import prx.entity.EntityContext;
 import prx.entity.Technology;
 import prx.entity.TechnologyGroup;
 
@@ -17,23 +15,11 @@ import prx.entity.TechnologyGroup;
  */
 public class TechMap {
 
-    public Technology map(TechStack.TechnologyGroup.Technology tech, String groupName) {
+    public Technology map(TechStack.TechnologyGroup.Technology tech, TechnologyGroup group) {
         Technology technology = new Technology();
         technology.setName(tech.getTechName());
         technology.setDescription(tech.getDescription());
-        //find group exist
-        EntityContext context = EntityContext.newInstance();
-        context.beginTransaction();
-        TechnologyGroupDAO groupDAO = new TechnologyGroupDAO(context.getEntityManager());
-        TechnologyGroup groupEntity = groupDAO.findByName(groupName);
-        context.commitTransaction();
-        if (null == groupEntity) {
-            TechnologyGroup group = new TechnologyGroup();
-            group.setName(groupName);
-            technology.setTechnologyGroupId(group);
-        }else{
-            technology.setTechnologyGroupId(groupEntity);
-        }
+        technology.setTechnologyGroupId(group);
         technology.setSiteCollection(null);
         return technology;
     }

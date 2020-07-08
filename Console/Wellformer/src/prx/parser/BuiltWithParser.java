@@ -14,10 +14,12 @@ import javax.persistence.EntityManager;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import prx.dao.SiteDAO;
+import prx.dao.TechnologyGroupDAO;
 import prx.data.TechStack;
 import prx.entity.EntityContext;
 import prx.entity.Site;
 import prx.entity.Technology;
+import prx.entity.TechnologyGroup;
 import prx.map.TechMap;
 import prx.utils.XMLUtils;
 
@@ -27,7 +29,8 @@ import prx.utils.XMLUtils;
  */
 public class BuiltWithParser extends Parser {
 
-    Set<String> domainSet;
+    protected Set<String> domainSet;
+    private TechnologyGroup groupEntity;
 
     public BuiltWithParser() {
     }
@@ -63,6 +66,7 @@ public class BuiltWithParser extends Parser {
 
     //TODO test this
     public void insertTechnology(List<TechStack> stackList) {
+
         EntityContext context = EntityContext.newInstance();
         EntityManager em = context.getEntityManager();
         for (TechStack techStack : stackList) {
@@ -73,12 +77,25 @@ public class BuiltWithParser extends Parser {
                 if (siteEntity != null) {
                     List<Technology> techList = new ArrayList(siteEntity.getTechnologyCollection());
                     techStack.getTechnologyGroup().forEach(group -> {
+                        //find group exist
+                        context.beginTransaction();
+                        TechnologyGroupDAO groupDAO = new TechnologyGroupDAO(context.getEntityManager());
+                        groupEntity = groupDAO.findByName(group.getGroupName());
+                        context.commitTransaction();
+                        if (null == groupEntity) {
+                            // insert group
+                            groupEntity = new TechnologyGroup();
+                            groupEntity.setName(group.getGroupName());
+                            context.beginTransaction();
+                            groupEntity = groupDAO.create(groupEntity);
+                            context.commitTransaction();
+                        }
                         group.getTechnology().forEach(tech -> {
                             boolean isExisted = techList.stream().anyMatch(x -> x.getName().equals(tech.getTechName()));
                             if (!isExisted) {
                                 TechMap techMap = new TechMap();
                                 //find Group Entity
-                                Technology technology = techMap.map(tech, group.getGroupName());
+                                Technology technology = techMap.map(tech, groupEntity);
                                 techList.add(technology);
                                 siteEntity.setTechnologyCollection(techList);
                             }
