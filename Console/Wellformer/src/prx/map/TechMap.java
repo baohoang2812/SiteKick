@@ -23,9 +23,4 @@ public class TechMap {
         technology.setSiteCollection(null);
         return technology;
     }
-
-//    public List<Technology> mapList(List<TechStack.TechnologyGroup> jaxbObjectList) {
-//        //
-//
-//    }
 }

@@ -15,10 +15,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import prx.constant.CommonConstant;
-import prx.dao.IGenericDAO;
-import prx.entity.EntityContext;
-import prx.map.IMap;
-import prx.map.SiteMap;
 import prx.utils.HttpUtils;
 import prx.utils.TextUtils;
 import prx.utils.XMLUtils;
@@ -139,7 +135,6 @@ public class Parser {
             System.out.println("!!! Parsing Page Detail ERROR !!!");
             System.out.println("Page: " + link);
             System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage());
         }
         return dataList;

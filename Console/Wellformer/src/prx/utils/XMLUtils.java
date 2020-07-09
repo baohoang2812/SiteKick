@@ -36,6 +36,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -164,7 +166,7 @@ public class XMLUtils {
         try {
             builder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+            Logger.getLogger(XMLUtils.class.getName()).log(Level.SEVERE, e.getMessage());
             return false;
         }
         // TODO[BHG, refactor ErrorHandler]

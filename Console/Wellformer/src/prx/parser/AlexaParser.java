@@ -106,7 +106,6 @@ public class AlexaParser extends Parser {
         } catch (IOException | XPathExpressionException | ParserConfigurationException | SAXException e) {
             System.out.println("!!!Parsing Home Page ERROR!!!");
             Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
-            e.printStackTrace();
         }
 
         this.setNavigationPath(SystemConfig.SITE_CATEGORY_NAVIGATION_PATH);
@@ -144,7 +143,6 @@ public class AlexaParser extends Parser {
             } catch (IOException | XPathExpressionException | ParserConfigurationException | SAXException | TransformerConfigurationException e) {
                 System.out.println("!!!Parsing Category Page ERROR!!! " + constructLink(categoryPath));
                 Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
-                e.printStackTrace();
             }
         }
     }
