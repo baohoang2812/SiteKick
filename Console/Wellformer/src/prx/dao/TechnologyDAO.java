@@ -22,6 +22,9 @@ public class TechnologyDAO extends BaseDAO<Technology, Integer> {
     public Technology getTechnologyByName(String name) {
         List<Technology> techList = entityManager.createNamedQuery("Technology.findByName")
                 .setParameter("name", name).getResultList();
+        if (techList == null || techList.isEmpty()) {
+            return null;
+        }
         return techList.get(0);
     }
 

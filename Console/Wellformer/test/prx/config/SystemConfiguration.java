@@ -9,11 +9,10 @@ package prx.config;
  *
  * @author Gia Bảo Hoàng
  */
-public class SystemConfig {
+public class SystemConfiguration {
 
-    public static final int TIME_OUT = 30000;
     public static final String ALEXA_BASE_URL = "https://www.alexa.com";
-    public static final String BUILT_WITH_BASE_URL = "https://builtwith.com/";
+    public static final String BUILT_WITH_BASE_URL = "https://builtwith.com";
 
     public static final String SITE_XSL_PATH = "src/prx/xsl/alexaStyleSheet.xsl";
     public static final String SITE_XSD_PATH = "src/prx/schema/siteSchema.xsd";

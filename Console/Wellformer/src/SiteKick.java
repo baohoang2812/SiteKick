@@ -9,9 +9,12 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBException;
 import org.xml.sax.SAXException;
-import prx.config.SystemConfig;
-import prx.constant.CommonConstant;
+import prx.config.Config;
+import prx.config.Config.BuiltWith;
+import prx.constant.ConfigConstant;
+import prx.exception.InvalidException;
 import prx.parser.BuiltWithParser;
 import prx.parser.AlexaParser;
 import prx.utils.XMLUtils;
@@ -22,44 +25,51 @@ import prx.utils.XMLUtils;
  */
 public class SiteKick {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        Set<String> domainSet = parseSite();
-        parseBuiltWith(domainSet);
+        try {
+            Config config = loadConfiguration();
+            if (config != null) {
+                parse(config);
+            } 
+        } catch (InvalidException | JAXBException e) {
+            Logger.getLogger(SiteKick.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+
     }
 
-    public static Set<String> parseSite() {
+    public static Set<String> parseSite(Config.Alexa alexaConfig) {
         AlexaParser alexaParser = new AlexaParser();
-        alexaParser.setCategoryXPath(SystemConfig.SITE_CATEGORY_XPATH);
-        alexaParser.setUrlXPath(SystemConfig.SITE_DETAIL_URL_XPATH);
-        alexaParser.setBaseURL(SystemConfig.ALEXA_BASE_URL);
-        alexaParser.setXslPath(SystemConfig.SITE_XSL_PATH);
-        alexaParser.setXsdPath(SystemConfig.SITE_XSD_PATH);
-        alexaParser.setNavigationPath(SystemConfig.SITE_ALL_CATEGORY_NAVIGATION_PATH);
-        alexaParser.setDomainXPath(SystemConfig.SITE_DOMAIN_XPATH);
+        Config.Alexa.XPath xPath = alexaConfig.getXPath();
+        alexaParser.setCategoryXPath(xPath.getCategory());
+        alexaParser.setUrlXPath(xPath.getDetailUrl());
+        alexaParser.setBaseURL(alexaConfig.getBaseUrl());
+        alexaParser.setXslPath(alexaConfig.getXslPath());
+        alexaParser.setXsdPath(alexaConfig.getXsdPath());
+        alexaParser.setNavigationPath(alexaConfig.getAllCategoryNavigationPath());
+        alexaParser.setDomainXPath(xPath.getDomain());
+        alexaParser.setCategoryNavigationPath(alexaConfig.getCategoryNavigationPath());
         alexaParser.parse();
+        System.out.println("Parse Alexa Finished");
         return alexaParser.getDomainSet();
     }
 
-    public static void parseBuiltWith(Set<String> domainSet) {
+    public static void parseBuiltWith(Set<String> domainSet, BuiltWith builtWithConfig) {
         BuiltWithParser builtWithParser = new BuiltWithParser();
-        builtWithParser.setBaseURL(SystemConfig.BUILT_WITH_BASE_URL);
-        builtWithParser.setXsdPath(SystemConfig.TECH_XSD_PATH);
-        builtWithParser.setXslPath(SystemConfig.TECH_XSL_PATH);
-        //TODO remove navigation Path on empty or null
-        builtWithParser.setNavigationPath(CommonConstant.EMPTY);
+        builtWithParser.setBaseURL(builtWithConfig.getBaseUrl());
+        builtWithParser.setXsdPath(builtWithConfig.getXsdPath());
+        builtWithParser.setXslPath(builtWithConfig.getXslPath());
+        builtWithParser.setNavigationPath(builtWithConfig.getNavigationPath());
         builtWithParser.setLinkSet(domainSet);
         builtWithParser.parse();
+        System.out.println("Parse Built With Finished");
     }
 
-    public static void generateCode() {
+    public static void generateCode(Config config) {
         String packageName = "prx.data";
-        String builtWithXsdPath = SystemConfig.TECH_XSD_PATH;
-        String similarWebXsdPath = SystemConfig.SITE_XSD_PATH;
+        String builtWithXsdPath = config.getBuiltWith().getXsdPath();
+        String alexaXsdPath = config.getAlexa().getXsdPath();
         File builtWithSchemaFile = new File(builtWithXsdPath);
-        File alexaSchemaFile = new File(similarWebXsdPath);
+        File alexaSchemaFile = new File(alexaXsdPath);
         String outputPath = "src/";
         try {
             XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
@@ -68,5 +78,30 @@ public class SiteKick {
             Logger.getLogger(SiteKick.class.getName()).log(Level.SEVERE, e.getMessage());
         }
 
+    }
+
+    public static Config loadConfiguration() throws JAXBException, InvalidException {
+        Config config = null;
+        boolean isValid = XMLUtils.isXMLValidateFromFilePath(ConfigConstant.XSD_PATH, ConfigConstant.XML_PATH);
+        if (isValid) {
+            // unmarshall
+            config = XMLUtils.unmarshall(Config.class, new File(ConfigConstant.XML_PATH));
+        } else {
+            throw new InvalidException("Invalid Configuration File");
+        }
+        return config;
+    }
+
+    public static void parse(Config config) {
+        Set<String> domainSet = parseSite(config.getAlexa());
+        parseBuiltWith(domainSet, config.getBuiltWith());
+    }
+
+    private static void generateConfigurationClass() {
+        try {
+            XMLUtils.generateClass(ConfigConstant.GEN_PACKAGE_NAME, new File(ConfigConstant.XSD_PATH), ConfigConstant.GEN_OUTPUT_PATH);
+        } catch (IOException | SAXException ex) {
+            Logger.getLogger(SiteKick.class.getName()).log(Level.SEVERE, ex.getMessage());
+        }
     }
 }

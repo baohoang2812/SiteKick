@@ -8,7 +8,7 @@ package prx.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import prx.constant.CommonConstant;
-import prx.constant.ExpressionConfig;
+import prx.constant.ExpressionConstant;
 import prx.wellformer.SyntaxWellformer;
 
 /**
@@ -33,7 +33,7 @@ public class TextUtils {
     // get Body section of document using RegEx
     public static String getBody(String src) {
         String result = src; 
-        String expression =  ExpressionConfig.BODY_EXPRESSION;
+        String expression =  ExpressionConstant.BODY_EXPRESSION;
         Pattern pattern = Pattern.compile(expression);
         
         Matcher matcher = pattern.matcher(result);
@@ -48,15 +48,15 @@ public class TextUtils {
         String result = src;
         
         // remove all <script> tags
-        String expression = ExpressionConfig.SCRIPT_EXPRESSION;
+        String expression = ExpressionConstant.SCRIPT_EXPRESSION;
         result = result.replaceAll(expression, CommonConstant.EMPTY);
         
         // remove all comments
-        expression = ExpressionConfig.COMMENT_EXPRESSION;
+        expression = ExpressionConstant.COMMENT_EXPRESSION;
         result = result.replaceAll(expression, CommonConstant.EMPTY);
         
         // remove all whitespace 
-        expression =  ExpressionConfig.SPACE_EXPRESSION;
+        expression =  ExpressionConstant.SPACE_EXPRESSION;
         result = result.replaceAll(expression, CommonConstant.EMPTY);
         
         return result;

@@ -27,17 +27,15 @@ public class Parser {
 
     protected String baseURL;
     protected String navigationPath;
-    protected String urlXPath;
     protected String xslPath;
     protected String xsdPath;
 
     public Parser() {
     }
 
-    public Parser(String baseURL, String navigationPath, String urlXPath, String xslPath, String xsdPath) {
+    public Parser(String baseURL, String navigationPath, String xslPath, String xsdPath) {
         this.baseURL = baseURL;
         this.navigationPath = navigationPath;
-        this.urlXPath = urlXPath;
         this.xslPath = xslPath;
         this.xsdPath = xsdPath;
     }
@@ -56,14 +54,6 @@ public class Parser {
 
     public void setNavigationPath(String navigationPath) {
         this.navigationPath = navigationPath;
-    }
-
-    public String getUrlXPath() {
-        return urlXPath;
-    }
-
-    public void setUrlXPath(String urlXPath) {
-        this.urlXPath = urlXPath;
     }
 
     public String getXslPath() {
@@ -134,16 +124,10 @@ public class Parser {
         } catch (IOException | TransformerException | JAXBException e) {
             System.out.println("!!! Parsing Page Detail ERROR !!!");
             System.out.println("Page: " + link);
-            System.out.println("Error: " + e.getMessage());
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage());
         }
         return dataList;
     }
-
-//    //TODO load To Database JPA
-//    protected <T> void loadToDatabase(List<T> dataList, IGenericDAO dao, IMap mapper) {
-//        dao.create(mapper.mapList(dataList));
-//    }
 
     protected <T> List<T> parsePageSet(Class<T> klass, Set<String> linkSet, Transformer transformer) {
         List<T> dataList = new ArrayList();

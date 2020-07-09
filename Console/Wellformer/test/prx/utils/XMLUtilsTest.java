@@ -13,7 +13,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import prx.config.SystemConfig;
+import prx.config.SystemConfiguration;
 import prx.data.Site;
 import prx.data.TechStack;
 
@@ -90,10 +90,10 @@ public class XMLUtilsTest {
         System.out.println("Test XML Unmarshall Alexa");
         String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn");
         pageContent = TextUtils.refineHtml(pageContent);
-        Transformer transformer = XMLUtils.getTransformer(SystemConfig.SITE_XSL_PATH);
+        Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.SITE_XSL_PATH);
         transformer.setParameter("categoryName", "News");
         String xml = XMLUtils.transformFromString(transformer, pageContent);
-        String xsdPath = SystemConfig.SITE_XSD_PATH;
+        String xsdPath = SystemConfiguration.SITE_XSD_PATH;
         boolean validate = XMLUtils.isXMLValidate(xsdPath, xml);
         if (validate) {
             try {
@@ -122,9 +122,9 @@ public class XMLUtilsTest {
         System.out.println("Test XML Unmarshall BuiltWith");
         String pageContent = HttpUtils.getContent("https://builtwith.com/tuoitre.vn");
         pageContent = TextUtils.refineHtml(pageContent);
-        Transformer transformer = XMLUtils.getTransformer(SystemConfig.TECH_XSL_PATH);
+        Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.TECH_XSL_PATH);
         String xml = XMLUtils.transformFromString(transformer, pageContent);
-        String xsdPath = SystemConfig.TECH_XSD_PATH;
+        String xsdPath = SystemConfiguration.TECH_XSD_PATH;
         boolean validate = XMLUtils.isXMLValidate(xsdPath, xml);
         if (validate) {
             TechStack techStack = XMLUtils.unmarshall(TechStack.class, xml);
@@ -194,7 +194,7 @@ public class XMLUtilsTest {
         System.out.println("Test XML Validate Alexa");
         String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn");
         pageContent = TextUtils.refineHtml(pageContent);
-        Transformer transformer = XMLUtils.getTransformer(SystemConfig.SITE_XSL_PATH);
+        Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.SITE_XSL_PATH);
         transformer.setParameter("categoryName", "News");
         String xml = XMLUtils.transformFromString(transformer, pageContent);
         String xsdPath = "src/prx/schema/siteSchema.xsd";
@@ -208,7 +208,7 @@ public class XMLUtilsTest {
         System.out.println("Test XML Validate Similar Web");
         String pageContent = HttpUtils.getContent("https://builtwith.com/bilibili.com");
         pageContent = TextUtils.refineHtml(pageContent);
-        Transformer transformer = XMLUtils.getTransformer(SystemConfig.TECH_XSL_PATH);
+        Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.TECH_XSL_PATH);
         String xml = XMLUtils.transformFromString(transformer, pageContent);
         String xsdPath = "src/prx/schema/builtwithSchema.xsd";
         boolean expResult = true;

@@ -21,7 +21,6 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import prx.config.SystemConfig;
 import prx.constant.CommonConstant;
 import prx.dao.CategoryDAO;
 import prx.dao.SiteDAO;
@@ -41,6 +40,8 @@ public class AlexaParser extends Parser {
     private Set<String> domainSet;
     private String categoryXPath;
     private String domainXPath;
+    private String categoryNavigationPath;
+    protected String urlXPath;
 
     public AlexaParser() {
         this.pageDetailLinkSet = new HashSet();
@@ -48,13 +49,24 @@ public class AlexaParser extends Parser {
         this.domainSet = new HashSet<>();
     }
 
-    public AlexaParser(Set<String> pageDetailLinkSet, Set<String> categoryLinkSet, Set<String> domainSet, String categoryXPath, String domainXPath, String baseURL, String navigationPath, String urlXPath, String xslPath, String xsdPath) {
-        super(baseURL, navigationPath, urlXPath, xslPath, xsdPath);
+    public AlexaParser(Set<String> pageDetailLinkSet, Set<String> categoryLinkSet, Set<String> domainSet, String categoryXPath, String domainXPath, String categoryNavigationPath, String urlXPath, String baseURL, String navigationPath, String xslPath, String xsdPath) {
+        super(baseURL, navigationPath, xslPath, xsdPath);
         this.pageDetailLinkSet = pageDetailLinkSet;
         this.categoryLinkSet = categoryLinkSet;
         this.domainSet = domainSet;
         this.categoryXPath = categoryXPath;
         this.domainXPath = domainXPath;
+        this.categoryNavigationPath = categoryNavigationPath;
+        this.urlXPath = urlXPath;
+    }
+
+
+    public void setCategoryNavigationPath(String categoryNavigationPath) {
+        this.categoryNavigationPath = categoryNavigationPath;
+    }
+
+    public String getCategoryNavigationPath() {
+        return categoryNavigationPath;
     }
 
     public Set<String> getDomainSet() {
@@ -97,6 +109,15 @@ public class AlexaParser extends Parser {
         this.categoryXPath = categoryXPath;
     }
 
+    public String getUrlXPath() {
+        return urlXPath;
+    }
+
+    public void setUrlXPath(String urlXPath) {
+        this.urlXPath = urlXPath;
+    }
+    
+
     private void parseAllCategory() {
         String homePage = constructLink(null);
         try {
@@ -108,7 +129,7 @@ public class AlexaParser extends Parser {
             Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
         }
 
-        this.setNavigationPath(SystemConfig.SITE_CATEGORY_NAVIGATION_PATH);
+        this.setNavigationPath(categoryNavigationPath);
         for (String categoryPath : categoryLinkSet) {
             try {
                 System.out.println("Parsing Page: " + constructLink(categoryPath));

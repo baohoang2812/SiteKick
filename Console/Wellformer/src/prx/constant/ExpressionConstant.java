@@ -9,7 +9,7 @@ package prx.constant;
  *
  * @author Eden
  */
-public class ExpressionConfig {
+public class ExpressionConstant {
     public static String BODY_EXPRESSION = "<body.*?</body>";
     public static String SCRIPT_EXPRESSION = "<script.*?</script>";
     public static String COMMENT_EXPRESSION = "<!--.*?-->";

@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import prx.dao.SiteDAO;
+import prx.dao.TechnologyDAO;
 import prx.dao.TechnologyGroupDAO;
 import prx.data.TechStack;
 import prx.entity.EntityContext;
@@ -89,11 +90,20 @@ public class BuiltWithParser extends Parser {
                             context.commitTransaction();
                         }
                         group.getTechnology().forEach(tech -> {
+                            // check Tech is existed in site 
                             boolean isExisted = techList.stream().anyMatch(x -> x.getName().equals(tech.getTechName()));
                             if (!isExisted) {
-                                // tech not existed, create new tech and add to site technologyCollection
-                                TechMap techMap = new TechMap();
-                                Technology technology = techMap.map(tech, groupEntity);
+                                // Check Tech is existed in Technology Table
+                                TechnologyDAO techDAO = new TechnologyDAO(em);
+                                context.beginTransaction();
+                                Technology technology = techDAO.getTechnologyByName(tech.getTechName());
+                                context.commitTransaction();
+                                // Tech not existed, create new tech
+                                if (technology == null) {
+                                    TechMap techMap = new TechMap();
+                                    technology = techMap.map(tech, groupEntity);
+                                }
+                                // Add to site technologyCollection
                                 techList.add(technology);
                                 siteEntity.setTechnologyCollection(techList);
                             }

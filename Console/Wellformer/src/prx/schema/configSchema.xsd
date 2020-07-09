@@ -1,0 +1,38 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="alexa">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="baseUrl"/>
+                            <xs:element type="xs:string" name="xslPath"/>
+                            <xs:element type="xs:string" name="xsdPath"/>
+                            <xs:element type="xs:string" name="allCategoryNavigationPath"/>
+                            <xs:element type="xs:string" name="categoryNavigationPath"/>
+                            <xs:element name="xPath">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="detailUrl"/>
+                                        <xs:element type="xs:string" name="domain"/>
+                                        <xs:element type="xs:string" name="category"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="builtWith">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="baseUrl"/>
+                            <xs:element type="xs:string" name="xslPath"/>
+                            <xs:element type="xs:string" name="xsdPath"/>
+                            <xs:element type="xs:string" name="navigationPath"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
