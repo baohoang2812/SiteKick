@@ -64,9 +64,7 @@ public class BuiltWithParser extends Parser {
         System.out.println("================================================");
     }
 
-    //TODO test this
     public void insertTechnology(List<TechStack> stackList) {
-
         EntityContext context = EntityContext.newInstance();
         EntityManager em = context.getEntityManager();
         for (TechStack techStack : stackList) {
@@ -83,7 +81,7 @@ public class BuiltWithParser extends Parser {
                         groupEntity = groupDAO.findByName(group.getGroupName());
                         context.commitTransaction();
                         if (null == groupEntity) {
-                            // insert group
+                            // insert group if not exist
                             groupEntity = new TechnologyGroup();
                             groupEntity.setName(group.getGroupName());
                             context.beginTransaction();
@@ -93,8 +91,8 @@ public class BuiltWithParser extends Parser {
                         group.getTechnology().forEach(tech -> {
                             boolean isExisted = techList.stream().anyMatch(x -> x.getName().equals(tech.getTechName()));
                             if (!isExisted) {
+                                // tech not existed, create new tech and add to site technologyCollection
                                 TechMap techMap = new TechMap();
-                                //find Group Entity
                                 Technology technology = techMap.map(tech, groupEntity);
                                 techList.add(technology);
                                 siteEntity.setTechnologyCollection(techList);
@@ -105,12 +103,6 @@ public class BuiltWithParser extends Parser {
                     context.beginTransaction();
                     siteDAO.update(siteEntity);
                     context.commitTransaction();
-                } else {
-                    //insert new Site
-//                    SiteMap siteMap = new SiteMap();
-//                    Site newSite = 
-//                    
-//                    siteDAO.create(site)
                 }
             }
         }

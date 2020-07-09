@@ -5,6 +5,7 @@
  */
 package prx.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import prx.entity.Site;
@@ -13,10 +14,10 @@ import prx.entity.Site;
  *
  * @author Gia Bảo Hoàng
  */
-public class SiteDAO extends BaseDAO<Site,Integer> {
+public class SiteDAO extends BaseDAO<Site, Integer> {
 
     public SiteDAO(EntityManager entityManager) {
-        super(entityManager,Site.class);
+        super(entityManager, Site.class);
     }
 
     public Site getFirstSiteByURL(String url) {
@@ -33,19 +34,20 @@ public class SiteDAO extends BaseDAO<Site,Integer> {
         if (site != null) {
             Site foundSite = getFirstSiteByURL(site.getUrl());
             if (foundSite == null) {
-                return create(site);
+                return super.create(site);
             }
-            return site;
+            return foundSite;
         }
         return null;
     }
 
     @Override
     public List<Site> create(List<Site> entityList) {
-       entityList.forEach(x -> {
-           create(x);
-       });
-       return entityList;
+        List<Site> result = new ArrayList();
+        entityList.forEach(x -> {
+            result.add(create(x));
+        });
+        return result;
     }
 
     public List<Site> getAllSite() {

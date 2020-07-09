@@ -24,7 +24,6 @@ import org.xml.sax.SAXException;
 import prx.config.SystemConfig;
 import prx.constant.CommonConstant;
 import prx.dao.CategoryDAO;
-import prx.dao.IGenericDAO;
 import prx.dao.SiteDAO;
 import prx.data.Site;
 import prx.entity.EntityContext;
@@ -176,17 +175,20 @@ public class AlexaParser extends Parser {
         System.out.println("================================================");
     }
 
-    private void insertSiteList(List<Site> siteList) {
+    public List<prx.entity.Site> insertSiteList(List<Site> siteList) {
         EntityContext context = EntityContext.newInstance();
+        List<prx.entity.Site> result = null;
         try {
             SiteDAO siteDAO = new SiteDAO(context.getEntityManager());
             context.beginTransaction();
             SiteMap siteMap = new SiteMap();
             List<prx.entity.Site> entityList = siteMap.mapList(siteList);
-            siteDAO.create(entityList);
+            result = siteDAO.create(entityList);
+            context.commitTransaction();
         } catch (Exception e) {
             Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
             context.rollBackTransaction();
         }
+        return result;
     }
 }
