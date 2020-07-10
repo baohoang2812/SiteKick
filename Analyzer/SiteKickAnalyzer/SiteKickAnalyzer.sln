@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteKickAnalyzerAPI", "SiteKickAnalyzer\SiteKickAnalyzerAPI.csproj", "{704D587D-C88E-42D4-9AC1-8B3E3D42025A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTrainer", "ModelTrainer\ModelTrainer.csproj", "{29DE87E9-6122-4C72-B0B5-683F22EF107D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{704D587D-C88E-42D4-9AC1-8B3E3D42025A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704D587D-C88E-42D4-9AC1-8B3E3D42025A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704D587D-C88E-42D4-9AC1-8B3E3D42025A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704D587D-C88E-42D4-9AC1-8B3E3D42025A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29DE87E9-6122-4C72-B0B5-683F22EF107D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DE87E9-6122-4C72-B0B5-683F22EF107D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DE87E9-6122-4C72-B0B5-683F22EF107D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DE87E9-6122-4C72-B0B5-683F22EF107D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D90862BB-6650-4B35-A040-7EC8BDA84DF8}
+	EndGlobalSection
+EndGlobal
