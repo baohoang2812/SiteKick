@@ -29,20 +29,25 @@ public class ProcessServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      */
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = INDEX;
         try {
             String action = request.getParameter("action");
-            switch (action) {
-                case "analize":
-                    url = ANALIZE_SERVLET;
-                    break;
-                default:
-                    url = INDEX;
+            if (action == null) {
+                url = INDEX;
+            } else {
+                switch (action) {
+                    case "Analyze":
+                        String domain = request.getParameter("txtDomain");
+                        url = ANALIZE_SERVLET;
+                        break;
+                    default:
+                        url = INDEX;
+                }
             }
+
         } catch (Exception e) {
             url = ERROR;
         } finally {
