@@ -23,7 +23,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="services.html">Services</a></li>
-                                    <li><a href="Case_Study.html">Case Study</a></li>
+                                    <li><a href="/SiteKick/SiteProcessController">Sites</a></li>
                                     <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                         <ul class="submenu">
                                             <li><a href="blog.html">blog</a></li>

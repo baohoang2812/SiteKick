@@ -74,14 +74,23 @@ public class SiteDAOTest {
      * Test of getAllSiteCount method, of class SiteDAO.
      */
     @Test
-    public void testGetAllSiteCount() {
-//        System.out.println("getAllSiteCount");
-//        SiteDAO instance = null;
-//        int expResult = 0;
-//        int result = instance.getAllSiteCount();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void getAllSiteCount() {
+        System.out.println("getAllSiteCount");
+        int expResult = 269;
+        int result = siteDAO.getAllSiteCount();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getSiteById method, of class SiteDAO.
+     */
+    @Test
+    public void getSiteById() {
+        System.out.println("Get Site By Id");
+        Site result = siteDAO.findByID(328);
+        assertNotNull(result);
+        assertNotNull(result.getCategoryId());
+        assertNotNull(result.getTechnologyList());
     }
 
 }

@@ -50,11 +50,18 @@ public class SiteDAO extends BaseDAO<Site, Integer> {
         return result;
     }
 
-    public List<Site> getAllSite() {
-        return entityManager.createNamedQuery("Site.findAll", Site.class).getResultList();
+    //TODO
+    public List<Site> getByLikeName(int noOfRecords, int pageIndex) {
+        return null;
     }
 
-    // named Query not created yet
+    public List<Site> getAllSite(int noOfRecords, int pageIndex) {
+        return entityManager.createNamedQuery("Site.findAll", Site.class)
+                .setMaxResults(noOfRecords)
+                .setFirstResult(noOfRecords * pageIndex)
+                .getResultList();
+    }
+
     public int getAllSiteCount() {
         return ((Number) entityManager.createNamedQuery("Site.countAll").getSingleResult()).intValue();
     }
