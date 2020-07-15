@@ -38,7 +38,8 @@ namespace ModelTrainer
             _predictionEngine = _mlContext.Model.CreatePredictionEngine<TechEntry, TechnologyPrediction>(Model);
             Console.WriteLine($"Calculating the top 5 technology for technology {techId} ...");
             var context = new SiteKickContext();
-            var top5 = (from m in Enumerable.Range(1, (int)CommonConstant.KEYCOUNT)
+            var lastTechId = context.Technology.Select(x => x.Id).ToList().LastOrDefault();
+            var top5 = (from m in Enumerable.Range(1, lastTechId)
                         let predictions = _predictionEngine.Predict(new TechEntry
                         {
                             TechnologyId = techId,
@@ -50,7 +51,7 @@ namespace ModelTrainer
                             TechnologyId = (uint)x.TechnologyId,
                             TechnologyName = context.Technology.Find(x.TechnologyId).Name,
                             Score = x.Score
-                        }).Take(maxResult).ToList();
+                        }).Where(t => t.TechnologyId != techId).Take(maxResult).ToList();
             return top5;
         }
 
