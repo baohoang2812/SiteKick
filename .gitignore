@@ -25,3 +25,9 @@ Console/Wellformer/nbproject/private/private.properties
 Console/Wellformer/nbproject/private/private.xml
 /Website/SiteKick/nbproject/private/
 /Website/SiteKick/build/
+Analyzer/SiteKickAnalyzer/ModelTrainer/obj/
+Analyzer/SiteKickAnalyzer/ModelTrainer/bin/
+Analyzer/SiteKickAnalyzer/SiteKick.Data/obj/
+Analyzer/SiteKickAnalyzer/SiteKick.Data/bin/
+Analyzer/SiteKickAnalyzer/SiteKick.Analyzer.API/bin/
+Analyzer/SiteKickAnalyzer/SiteKick.Analyzer.API/obj/
