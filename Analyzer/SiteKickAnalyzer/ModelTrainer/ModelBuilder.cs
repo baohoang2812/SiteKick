@@ -24,7 +24,7 @@ namespace ModelTrainer
             site.ForEach(s =>
             {
                 var techList = s.SiteTech.Select(st => st.Technology).OrderBy(x => x.TechnologyGroupId).ToList();
-                var groupList = techList.Select(x => x.TechnologyGroupId).ToList();
+                var groupList = techList.Select(x => x.TechnologyGroupId).Distinct().ToList();
                 groupList.ForEach(g =>
                 {
                     var allTechInGroup = techList.Where(x => x.TechnologyGroupId == g).Select(x => x.Id).ToList();
