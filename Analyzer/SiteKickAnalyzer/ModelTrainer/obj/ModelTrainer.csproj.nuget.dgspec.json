@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj": {}
+    "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj": {
+    "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj",
+        "projectUniqueName": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj",
         "projectName": "ModelTrainer",
-        "projectPath": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj",
-        "packagesPath": "C:\\Users\\BAO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\obj\\",
+        "projectPath": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\ModelTrainer.csproj",
+        "packagesPath": "C:\\Users\\Eden\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\ModelTrainer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\BAO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Eden\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +32,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj": {
-                "projectPath": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj"
+              "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj": {
+                "projectPath": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj"
               }
             }
           }
@@ -79,21 +79,21 @@
         }
       }
     },
-    "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj": {
+    "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj",
         "projectName": "SiteKick.Data",
-        "projectPath": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj",
-        "packagesPath": "C:\\Users\\BAO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BAO\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\obj\\",
+        "projectPath": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\SiteKick.Data.csproj",
+        "packagesPath": "C:\\Users\\Eden\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Eden\\Desktop\\SiteKick\\Analyzer\\SiteKickAnalyzer\\SiteKick.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\BAO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Eden\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
