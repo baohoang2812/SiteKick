@@ -3,32 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sitekick.controller.site;
+package sitekick.controller.technology;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
-import prx.constant.CommonConstant;
-import prx.entity.EntityContext;
+import prx.config.Config;
+import sitekick.crawler.SiteKickCrawler;
 import prx.dao.SiteDAO;
-import prx.entity.Site;
+import prx.entity.EntityContext;
+import sitekick.constant.ConfigConstant;
 
 /**
  *
- * @author Gia Bảo Hoàng
+ * @author Eden
  */
-@WebServlet(name = "SiteViewController", urlPatterns = {"/SiteViewController"})
-public class SiteViewController extends HttpServlet {
+@WebServlet(name = "TechCrawlerServlet", urlPatterns = {"/TechCrawlerServlet"})
+public class TechCrawlerServlet extends HttpServlet {
 
-    private static final String SITES_PAGE = "sites.jsp";
     private static final String ERROR = "error.jsp";
+    private static final String SUCCESS = "index.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,26 +46,24 @@ public class SiteViewController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String txtPageIndex = request.getParameter("pageIndex");
-            int pageIndex = 1;
-            if (!(txtPageIndex == null || StringUtils.isEmpty(txtPageIndex) || StringUtils.isBlank(url))) {
-                pageIndex = Integer.parseInt(txtPageIndex);
+            SiteKickCrawler crawler = new SiteKickCrawler();
+            ServletContext servletContext = getServletContext();
+            String xsdPath = servletContext.getRealPath(ConfigConstant.XSD_PATH);
+            String xmlPath = servletContext.getRealPath(ConfigConstant.XML_PATH);
+            Config config = crawler.loadConfiguration(xsdPath, xmlPath);
+            if (config != null && config.getBuiltWith() != null) {
+                EntityContext entityContext = EntityContext.newInstance();
+                SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
+                entityContext.beginTransaction();
+                Set<String> urlList = new HashSet(siteDAO.getAllSiteUrl());
+                entityContext.commitTransaction();
+                crawler.parseBuiltWith(urlList, config.getBuiltWith(), servletContext);
+                url = SUCCESS;
             }
-            EntityContext entityContext = EntityContext.newInstance();
-            SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
-            entityContext.beginTransaction();
-            int totalSiteCount = siteDAO.getAllSiteCount();
-            List<Site> siteList = siteDAO.getAllSite(CommonConstant.PAGE_SIZE, pageIndex);
-            entityContext.commitTransaction();
-            int totalPageCount = totalSiteCount / CommonConstant.PAGE_SIZE;
-            // set Attributes
-            request.setAttribute("SiteList", siteList);
-            request.setAttribute("TotalPageCount", totalPageCount);
-            request.setAttribute("PageIndex", pageIndex);
-            url = SITES_PAGE;
         } catch (Exception e) {
+            Logger.getLogger(TechCrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
             request.setAttribute("Error", e.getMessage());
-            Logger.getLogger(SiteViewController.class.getName()).log(Level.SEVERE, e.getMessage());
+            url = ERROR;
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

@@ -13,9 +13,9 @@
     </head>
     <body>
         <h1>Oops... There is an error. Contact administrator for more information!</h1>
-        <h5>
+        <h3>
             Error description: 
-        </h5>
+        </h3>
         <p>
             <font color="red">
             ${requestScope.Error}

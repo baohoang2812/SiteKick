@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sitekick.controller.site;
+package sitekick.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -14,20 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
-import prx.constant.CommonConstant;
-import prx.entity.EntityContext;
-import prx.dao.SiteDAO;
-import prx.entity.Site;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
-@WebServlet(name = "SiteViewController", urlPatterns = {"/SiteViewController"})
-public class SiteViewController extends HttpServlet {
+@WebServlet(name = "SiteProcessController", urlPatterns = {"/SiteProcessController"})
+public class SiteProcessServlet extends HttpServlet {
 
-    private static final String SITES_PAGE = "sites.jsp";
+    private static final String VIEW = "SiteViewController";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -44,26 +38,22 @@ public class SiteViewController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String txtPageIndex = request.getParameter("pageIndex");
-            int pageIndex = 1;
-            if (!(txtPageIndex == null || StringUtils.isEmpty(txtPageIndex) || StringUtils.isBlank(url))) {
-                pageIndex = Integer.parseInt(txtPageIndex);
+            String action = request.getParameter("action");
+            if (action == null) {
+                url = VIEW;
+            } else {
+                switch (action) {
+                    case "View":
+                        url = VIEW;
+                        break;
+                    default:
+                        url = VIEW;
+                }
             }
-            EntityContext entityContext = EntityContext.newInstance();
-            SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
-            entityContext.beginTransaction();
-            int totalSiteCount = siteDAO.getAllSiteCount();
-            List<Site> siteList = siteDAO.getAllSite(CommonConstant.PAGE_SIZE, pageIndex);
-            entityContext.commitTransaction();
-            int totalPageCount = totalSiteCount / CommonConstant.PAGE_SIZE;
-            // set Attributes
-            request.setAttribute("SiteList", siteList);
-            request.setAttribute("TotalPageCount", totalPageCount);
-            request.setAttribute("PageIndex", pageIndex);
-            url = SITES_PAGE;
         } catch (Exception e) {
+            Logger.getLogger(SiteProcessServlet.class.getName()).log(Level.SEVERE, e.getMessage());
             request.setAttribute("Error", e.getMessage());
-            Logger.getLogger(SiteViewController.class.getName()).log(Level.SEVERE, e.getMessage());
+            url = ERROR;
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

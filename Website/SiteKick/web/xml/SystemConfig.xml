@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <alexa>
+        <baseUrl>https://www.alexa.com</baseUrl>
+        <xslPath>/xsl/alexaStyleSheet.xsl</xslPath>
+        <xsdPath>/schema/siteSchema.xsd</xsdPath>
+        <allCategoryNavigationPath>/topsites/category</allCategoryNavigationPath>
+        <categoryNavigationPath></categoryNavigationPath>
+        <xPath>
+            <detailUrl><![CDATA[//*[contains(@class,'listings')]//*[contains(@class,'DescriptionCell')]//a/@href]]></detailUrl>
+            <domain><![CDATA[//*[contains(@class,'listings')]//*[contains(@class,'DescriptionCell')]//a/text()]]></domain>
+            <category><![CDATA[//*[@class='categories top']//li/a/@href]]></category>
+        </xPath>
+    </alexa>
+    <builtWith>
+        <baseUrl>https://builtwith.com</baseUrl>
+        <xslPath>/xsl/builtwithStyleSheet.xsl</xslPath>
+        <xsdPath>/schema/builtwithSchema.xsd</xsdPath>
+        <navigationPath></navigationPath>
+    </builtWith>
+</config>

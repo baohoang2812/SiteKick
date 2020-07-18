@@ -37,7 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Site.findByUrl", query = "SELECT s FROM Site s WHERE s.url = :url")
     , @NamedQuery(name = "Site.findByGlobalRank", query = "SELECT s FROM Site s WHERE s.globalRank = :globalRank")
     , @NamedQuery(name = "Site.findByCountry", query = "SELECT s FROM Site s WHERE s.country = :country")
-    , @NamedQuery(name = "Site.findByCountryRank", query = "SELECT s FROM Site s WHERE s.countryRank = :countryRank")})
+    , @NamedQuery(name = "Site.findByCountryRank", query = "SELECT s FROM Site s WHERE s.countryRank = :countryRank")
+    , @NamedQuery(name = "Site.countAll", query = "SELECT count(s.id) FROM Site s")
+    , @NamedQuery(name = "Site.getAllUrl", query = "SELECT s.url FROM Site s")
+})
 public class Site implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -93,12 +93,23 @@ public class XMLUtils {
         return clazz.cast(unmarshaller.unmarshal(new InputSource(new StringReader(source))));
     }
 
+    // marshall to File
     public static <T> void marshall(T obj, File xmlFile) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(obj.getClass());
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.UTF_8);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(obj, xmlFile);
+    }
+    
+    public static <T> String marshallToString(T obj) throws JAXBException{
+        JAXBContext jaxbContext = JAXBContext.newInstance(obj.getClass());
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.UTF_8);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        StringWriter stringWriter = new StringWriter();
+        marshaller.marshal(obj, stringWriter);
+        return stringWriter.toString();
     }
 
     //TrAX 
@@ -137,6 +148,7 @@ public class XMLUtils {
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(new File(xmlPath)));
         } catch (SAXException | IOException e) {
+            Logger.getLogger(XMLUtils.class.getName()).log(Level.SEVERE, e.getMessage());
             System.out.println(xmlPath + " is NOT validate, error: " + e.getMessage());
             return false;
         }

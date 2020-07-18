@@ -54,8 +54,18 @@ public class SiteDAO extends BaseDAO<Site, Integer> {
         return entityManager.createNamedQuery("Site.findAll", Site.class).getResultList();
     }
 
-    // named Query not created yet
     public int getAllSiteCount() {
         return ((Number) entityManager.createNamedQuery("Site.countAll").getSingleResult()).intValue();
+    }
+    
+    public List<Site> getAllSite(int noOfRecords, int pageIndex) {
+        return entityManager.createNamedQuery("Site.findAll", Site.class)
+                .setMaxResults(noOfRecords)
+                .setFirstResult(noOfRecords * pageIndex)
+                .getResultList();
+    }
+    
+    public List<String> getAllSiteUrl(){
+        return entityManager.createNamedQuery("Site.getAllUrl", String.class).getResultList();
     }
 }

@@ -32,3 +32,5 @@ Analyzer/SiteKickAnalyzer/SiteKick.Data/bin/
 Analyzer/SiteKickAnalyzer/SiteKick.Analyzer.API/bin/
 Analyzer/SiteKickAnalyzer/SiteKick.Analyzer.API/obj/
 Analyzer/SiteKickAnalyzer/.vs/
+/Website/SiteKick/dist/
+/Console/Wellformer/dist/

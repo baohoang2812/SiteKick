@@ -6,28 +6,31 @@
 package sitekick.controller.site;
 
 import java.io.IOException;
-import java.util.List;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
-import prx.constant.CommonConstant;
-import prx.entity.EntityContext;
+import prx.config.Config;
 import prx.dao.SiteDAO;
+import prx.entity.EntityContext;
 import prx.entity.Site;
+import sitekick.constant.ConfigConstant;
+import sitekick.crawler.SiteKickCrawler;
 
 /**
  *
- * @author Gia Bảo Hoàng
+ * @author Eden
  */
-@WebServlet(name = "SiteViewController", urlPatterns = {"/SiteViewController"})
-public class SiteViewController extends HttpServlet {
-
-    private static final String SITES_PAGE = "sites.jsp";
+@WebServlet(name = "AnalysisServlet", urlPatterns = {"/AnalysisServlet"})
+public class AnalysisServlet extends HttpServlet {
+    private static final String SUCCESS = "siteDetail.jsp";
     private static final String ERROR = "error.jsp";
 
     /**
@@ -44,26 +47,40 @@ public class SiteViewController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String txtPageIndex = request.getParameter("pageIndex");
-            int pageIndex = 1;
-            if (!(txtPageIndex == null || StringUtils.isEmpty(txtPageIndex) || StringUtils.isBlank(url))) {
-                pageIndex = Integer.parseInt(txtPageIndex);
+            String siteUrl = request.getParameter("txtUrl");
+            if (siteUrl != null && !siteUrl.trim().isEmpty()) {
+                URL urlObj = new URL(siteUrl);
+                String domain = urlObj.getHost();
+                String siteURL = domain.replace("www.", "");
+                EntityContext entityContext = EntityContext.newInstance();
+                SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
+                Site site = siteDAO.getFirstSiteByURL(siteURL);
+                if (null != site) {
+                    request.setAttribute("SITE", site);
+                } else {
+                    Site newSite = new Site();
+                    newSite.setUrl(siteURL);
+                    entityContext.beginTransaction();
+                    siteDAO.create(site);
+                    entityContext.commitTransaction();
+                    SiteKickCrawler crawler = new SiteKickCrawler();
+                    ServletContext servletContext= request.getServletContext();
+                    String xsdPath = servletContext.getRealPath(ConfigConstant.XSD_PATH);
+                    String xmlPath = servletContext.getRealPath(ConfigConstant.XML_PATH);
+                    
+                    Config config = crawler.loadConfiguration(xsdPath, xmlPath);
+                    Set<String> domainSet = new HashSet();
+                    domainSet.add(siteURL);
+                    crawler.parseBuiltWith(domainSet, config.getBuiltWith(), servletContext);
+                    request.setAttribute("SITE", site);
+                }
+                url = SUCCESS;
             }
-            EntityContext entityContext = EntityContext.newInstance();
-            SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
-            entityContext.beginTransaction();
-            int totalSiteCount = siteDAO.getAllSiteCount();
-            List<Site> siteList = siteDAO.getAllSite(CommonConstant.PAGE_SIZE, pageIndex);
-            entityContext.commitTransaction();
-            int totalPageCount = totalSiteCount / CommonConstant.PAGE_SIZE;
-            // set Attributes
-            request.setAttribute("SiteList", siteList);
-            request.setAttribute("TotalPageCount", totalPageCount);
-            request.setAttribute("PageIndex", pageIndex);
-            url = SITES_PAGE;
+
         } catch (Exception e) {
+            Logger.getLogger(SiteCrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
             request.setAttribute("Error", e.getMessage());
-            Logger.getLogger(SiteViewController.class.getName()).log(Level.SEVERE, e.getMessage());
+            url = ERROR;
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
