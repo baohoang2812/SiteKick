@@ -57,6 +57,7 @@ public class SiteService {
                         .filter(tech -> tech.getTechnologyGroupId().getName().equals(g.getGroupName()))
                         .map(t -> {
                             TechStack.TechnologyGroup.Technology technology = new TechStack.TechnologyGroup.Technology();
+                            technology.setId(t.getId());
                             technology.setTechName(t.getName());
                             technology.setDescription(t.getDescription());
                             return technology;

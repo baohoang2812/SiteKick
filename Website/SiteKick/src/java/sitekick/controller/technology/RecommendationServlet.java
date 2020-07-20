@@ -6,32 +6,31 @@
 package sitekick.controller.technology;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import prx.config.Config;
-import sitekick.crawler.SiteKickCrawler;
-import prx.dao.SiteDAO;
+import prx.dao.TechnologyDAO;
+import prx.data.TechnologySuggestion;
 import prx.entity.EntityContext;
-import prx.services.SiteService;
-import sitekick.constant.CacheConstant;
+import prx.services.TechnologyService;
+import sitekick.constant.ConfigConstant;
+import sitekick.controller.CrawlerServlet;
 
 /**
  *
- * @author Eden
+ * @author Gia Bảo Hoàng
  */
-@WebServlet(name = "TechCrawlerServlet", urlPatterns = {"/TechCrawlerServlet"})
-public class TechCrawlerServlet extends HttpServlet {
+@WebServlet(name = "RecommendationServlet", urlPatterns = {"/RecommendationServlet"})
+public class RecommendationServlet extends HttpServlet {
 
+    private static final String SUCCESS = "suggest.jsp";
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "admin.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,28 +46,24 @@ public class TechCrawlerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            SiteKickCrawler crawler = new SiteKickCrawler();
-            ServletContext servletContext = getServletContext();
-            String xsdPath = (String) servletContext.getAttribute(CacheConstant.CONFIG_XSD);
-            String xmlPath = (String) servletContext.getAttribute(CacheConstant.CONFIG_XML);
-            EntityContext entityContext = EntityContext.newInstance();
-            SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
-            Config config = crawler.loadConfiguration(xsdPath, xmlPath);
-            if (config != null && config.getBuiltWith() != null) {
-                entityContext.beginTransaction();
-                Set<String> urlList = new HashSet(siteDAO.getAllSiteUrl());
-                entityContext.commitTransaction();
-                crawler.parseBuiltWith(urlList, config.getBuiltWith(), servletContext);
-                url = SUCCESS;
-                request.setAttribute("INFO", "Crawl Technology Successfully!");
-                // reload Servlet Context
-                SiteService siteService = new SiteService(siteDAO);
-                servletContext.setAttribute(CacheConstant.SITES_XML, siteService.getAllSitesXMLString());
+            String[] txtTechIds = request.getParameterValues("txtTechIds");
+            List<Integer> idList = new ArrayList();
+
+            if (txtTechIds != null && txtTechIds.length > 0) {
+                for (String txtId : txtTechIds) {
+                    idList.add(Integer.valueOf(txtId));
+                }
             }
+            EntityContext entityContext = EntityContext.newInstance();
+            TechnologyDAO techDAO = new TechnologyDAO(entityContext.getEntityManager());
+            TechnologyService techService = new TechnologyService(techDAO);
+            List<TechnologySuggestion> suggestions = techService.suggestTechnology(idList, ConfigConstant.BASE_API_URL);
+            request.setAttribute("Suggestions", suggestions);
+            url = SUCCESS;
         } catch (Exception e) {
-            Logger.getLogger(TechCrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
-            request.setAttribute("Error", e.getMessage());
             url = ERROR;
+            Logger.getLogger(CrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
+            request.setAttribute("Error", e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

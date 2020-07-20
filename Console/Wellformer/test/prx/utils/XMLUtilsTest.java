@@ -15,6 +15,7 @@ import javax.xml.transform.TransformerException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import prx.config.SystemConfiguration;
+import prx.constant.HttpContentTypeConstant;
 import prx.data.Site;
 import prx.data.TechStack;
 
@@ -89,7 +90,7 @@ public class XMLUtilsTest {
     @Test
     public void testUnmarshall_Site() throws Exception {
         System.out.println("Test XML Unmarshall Alexa");
-        String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn");
+        String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn", HttpContentTypeConstant.TEXT_HTML);
         pageContent = TextUtils.refineHtml(pageContent);
         Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.SITE_XSL_PATH);
         transformer.setParameter("categoryName", "News");
@@ -121,7 +122,7 @@ public class XMLUtilsTest {
     @Test
     public void testMarshall_BuiltWith() throws Exception {
         System.out.println("Test XML Unmarshall BuiltWith");
-        String pageContent = HttpUtils.getContent("https://builtwith.com/tuoitre.vn");
+        String pageContent = HttpUtils.getContent("https://builtwith.com/tuoitre.vn", HttpContentTypeConstant.TEXT_HTML);
         pageContent = TextUtils.refineHtml(pageContent);
         Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.TECH_XSL_PATH);
         String xml = XMLUtils.transformFromString(transformer, pageContent);
@@ -193,7 +194,7 @@ public class XMLUtilsTest {
     @Test
     public void testIsXMLValidate_Alexa_StringInput() throws IOException, TransformerException {
         System.out.println("Test XML Validate Alexa");
-        String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn");
+        String pageContent = HttpUtils.getContent("https://www.alexa.com/siteinfo/tuoitre.vn", HttpContentTypeConstant.TEXT_HTML);
         pageContent = TextUtils.refineHtml(pageContent);
         Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.SITE_XSL_PATH);
         transformer.setParameter("categoryName", "News");
@@ -207,7 +208,7 @@ public class XMLUtilsTest {
     @Test
     public void testIsXMLValidate_BuiltWith_StringInput() throws IOException, TransformerException {
         System.out.println("Test XML Validate Similar Web");
-        String pageContent = HttpUtils.getContent("https://builtwith.com/bilibili.com");
+        String pageContent = HttpUtils.getContent("https://builtwith.com/bilibili.com", HttpContentTypeConstant.TEXT_HTML);
         pageContent = TextUtils.refineHtml(pageContent);
         Transformer transformer = XMLUtils.getTransformer(SystemConfiguration.TECH_XSL_PATH);
         String xml = XMLUtils.transformFromString(transformer, pageContent);

@@ -21,6 +21,7 @@ namespace SiteKick.Analyzer.API.Controllers
                 return Ok(new ApiResult()
                 {
                     Code = ResultCode.Success,
+                    Message = ResultCode.Success.DisplayName(),
                     Data = top5
                 });
             }

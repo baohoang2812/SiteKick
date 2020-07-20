@@ -24,6 +24,7 @@ public class SiteProcessServlet extends HttpServlet {
     private static final String VIEW = "SiteViewController";
     private static final String ERROR = "error.jsp";
     private static final String ANALYSIS = "AnalysisServlet";
+    private static final String RECOMMEND = "RecommendationServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,6 +50,9 @@ public class SiteProcessServlet extends HttpServlet {
                         break;
                     case "Analyze":
                         url = ANALYSIS;
+                        break;
+                    case "Recommend":
+                        url = RECOMMEND;
                         break;
                     default:
                         url = VIEW;

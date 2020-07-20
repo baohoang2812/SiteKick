@@ -15,7 +15,7 @@ and open the template in the editor.
     <body>
         <%@include file="header.jsp" %>
         <div>
-            <h3><a href="login.jsp">Login</a></h3>
+            <h3><a href="AccountServlet?action=Signin">Login</a></h3>
             <h1>Site Kick</h1>
             <h3>
                 BoostUp your Business & Get <br>

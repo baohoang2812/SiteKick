@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import prx.constant.HttpContentTypeConstant;
 import prx.utils.HttpUtils;
 
 /**
@@ -58,7 +59,7 @@ public class TextUtilsTest {
         String pageContent = null;
         for (String url : urls) {
             try {
-                pageContent = HttpUtils.getContent(url);
+                pageContent = HttpUtils.getContent(url, HttpContentTypeConstant.TEXT_HTML);
             } catch (IOException e) {
                 // skip
             }

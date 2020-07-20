@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.fail;
 import org.junit.Test;
+import prx.constant.HttpContentTypeConstant;
 
 /**
  *
@@ -30,7 +31,7 @@ public class HttpUtilsTest {
         List<String> urls = new ArrayList();
         urls.add("https://www.alexa.com/topsites/category/Top/Home");
         for (String link : urls) {
-            result = HttpUtils.getContent(link);
+            result = HttpUtils.getContent(link, HttpContentTypeConstant.TEXT_HTML);
             result = TextUtils.refineHtml(result);
             boolean isWellform=XMLUtils.isWellformXML(result);
             PrintWriter pw = new PrintWriter("src/test/alexa_category" + ".html");

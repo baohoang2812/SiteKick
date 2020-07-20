@@ -76,7 +76,6 @@ public class AnalysisServlet extends HttpServlet {
                         Set<String> domainSet = new HashSet();
                         domainSet.add(siteURL);
                         crawler.parseBuiltWith(domainSet, config.getBuiltWith(), servletContext);
-                        //TODO reset servletContext.attribute and reload all sites
                         // reload Servlet Context
                         SiteService siteService = new SiteService(siteDAO);
                         String sitesXML = siteService.getAllSitesXMLString();

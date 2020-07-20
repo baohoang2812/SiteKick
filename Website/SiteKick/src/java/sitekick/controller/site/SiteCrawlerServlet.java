@@ -26,7 +26,7 @@ import sitekick.crawler.SiteKickCrawler;
 public class SiteCrawlerServlet extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "index.jsp";
+    private static final String SUCCESS = "admin.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,8 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AccountServlet", urlPatterns = {"/AccountServlet"})
 public class AccountServlet extends HttpServlet {
 
-    private static final String LOGIN = "LoginServlet";
+    private static final String LOGIN_SERVLET = "LoginServlet";
     private static final String ERROR = "error.jsp";
+    private static final String LOG_OUT = "LogoutServlet";
+    private static final String ADMIN = "admin.jsp";
+    private static final String LOGIN = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,13 +43,28 @@ public class AccountServlet extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-            switch (action) {
-                case "Login":
-                    url = LOGIN;
-                    break;
-                default:
-                    url = ERROR;
-                    request.setAttribute("Error", "Action not supported");
+            if (action == null) {
+                url = LOGIN;
+            } else {
+                switch (action) {
+                    case "Signin":
+                        HttpSession session = request.getSession();
+                        if (session != null && session.getAttribute("Account") != null) {
+                            url = ADMIN;
+                        } else {
+                            url = LOGIN;
+                        }
+                        break;
+                    case "Login":
+                        url = LOGIN_SERVLET;
+                        break;
+                    case "Logout":
+                        url = LOG_OUT;
+                        break;
+                    default:
+                        url = ERROR;
+                        request.setAttribute("Error", "Action not supported");
+                }
             }
         } catch (Exception e) {
             url = ERROR;

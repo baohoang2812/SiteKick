@@ -8,7 +8,7 @@ namespace ModelTrainer
 {
     public class ModelConsumer
     {
-        private PredictionEngine<TechEntry, TechnologyPrediction> _predictionEngine;
+        private PredictionEngine<TechEntry, TechnologySuggestion> _predictionEngine;
         private MLContext _mlContext;
         public string ModelPath { get; set; }
         private DataViewSchema ModelSchema { get; set; }
@@ -32,9 +32,9 @@ namespace ModelTrainer
         /// <summary>
         /// Find the top 5 combined technology for the technology id
         /// </summary>
-        public List<TechnologyPrediction> Predict(uint techId, int maxResult = 5)
+        public List<TechnologySuggestion> Predict(uint techId, int maxResult = 5)
         {
-            _predictionEngine = _mlContext.Model.CreatePredictionEngine<TechEntry, TechnologyPrediction>(Model);
+            _predictionEngine = _mlContext.Model.CreatePredictionEngine<TechEntry, TechnologySuggestion>(Model);
             Console.WriteLine($"Calculating the top 5 technology for technology {techId} ...");
             var context = new SiteKickContext();
             var lastTechId = context.Technology.Select(x => x.Id).ToList().LastOrDefault();
@@ -45,12 +45,14 @@ namespace ModelTrainer
                                  CombinedTechnologyId = (uint)m
                              })
                              orderby predictions.Score descending
-                             select (TechnologyId: m, Score: predictions.Score)).Select(x => new TechnologyPrediction
+                             select (SuggestTechnologyId: m, Score: predictions.Score)).Select(x => new TechnologySuggestion()
                              {
-                                 TechnologyId = (uint)x.TechnologyId,
-                                 TechnologyName = context.Technology.Find(x.TechnologyId).Name,
+                                 TechnologyId = (uint)techId,
+                                 TechnologyName = context.Technology.Find((int)techId).Name,
+                                 SuggestTechnologyId = (uint)x.SuggestTechnologyId,
+                                 SuggestTechnologyName = context.Technology.Find(x.SuggestTechnologyId).Name,
                                  Score = x.Score
-                             }).Where(t => t.TechnologyId != techId).Take(maxResult).ToList();
+                             }).Where(t => t.SuggestTechnologyId != techId).Take(maxResult).ToList();
             return topResult;
         }
 
@@ -58,10 +60,10 @@ namespace ModelTrainer
         /// <summary>
         /// Find the top 5 combined technology for the technology id
         /// </summary>
-        public List<TechnologyPrediction> Predict(List<uint> techIdList, int maxResult = 5)
+        public List<TechnologySuggestion> Predict(List<uint> techIdList, int maxResult = 5)
         {
-            _predictionEngine = _mlContext.Model.CreatePredictionEngine<TechEntry, TechnologyPrediction>(Model);
-            List<TechnologyPrediction> technologyPredictions = new List<TechnologyPrediction>();
+            _predictionEngine = _mlContext.Model.CreatePredictionEngine<TechEntry, TechnologySuggestion>(Model);
+            List<TechnologySuggestion> technologyPredictions = new List<TechnologySuggestion>();
             techIdList.ForEach(id =>
             {
                 technologyPredictions.AddRange(Predict(id, maxResult));

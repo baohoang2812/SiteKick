@@ -29,5 +29,9 @@
         <form action="CrawlerServlet">
             <input type="submit" name="action" value="Tech"/>
         </form>
+         <h3>Log Out</h3>
+         <form action="AccountServlet">
+              <input type="submit" name="action" value="Logout"/>
+         </form>
     </body>
 </html>

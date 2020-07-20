@@ -327,11 +327,14 @@ public class TechStack {
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
+            "id",
             "techName",
             "description"
         })
         public static class Technology {
-
+            //TODO add id to schema
+            @XmlElement(name = "id")
+            protected int id;
             @XmlElement(required = true)
             protected String techName;
             @XmlElement(required = true)
@@ -375,6 +378,14 @@ public class TechStack {
              */
             public void setDescription(String value) {
                 this.description = value;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
             }
 
         }

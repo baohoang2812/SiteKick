@@ -12,4 +12,5 @@ package sitekick.constant;
 public class ConfigConstant {
     public static final String XML_PATH = "/xml/SystemConfig.xml";
     public static final String XSD_PATH = "/schema/configSchema.xsd";
+    public static final String BASE_API_URL = "http://192.168.0.115:45457";
 }

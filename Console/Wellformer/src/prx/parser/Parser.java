@@ -15,6 +15,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import prx.constant.CommonConstant;
+import prx.constant.HttpContentTypeConstant;
 import prx.utils.HttpUtils;
 import prx.utils.TextUtils;
 import prx.utils.XMLUtils;
@@ -80,7 +81,7 @@ public class Parser {
     }
 
     public String preprocessPageContent(String url) throws IOException {
-        String pageContent = HttpUtils.getContent(url);
+        String pageContent = HttpUtils.getContent(url, HttpContentTypeConstant.TEXT_HTML);
         return TextUtils.refineHtml(pageContent);
     }
 

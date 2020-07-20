@@ -20,36 +20,39 @@
         </html>
     </xsl:template>
     <xsl:template match="TechStacks">
-        <table id="site-table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Url</th>
-                    <!--                    <th>Global Rank</th>
-                    <th>Country</th>
-                    <th>Country Rank</th>
-                    <th>Category</th>-->
-                </tr>
-            </thead>
-            <tbody>
-                <xsl:for-each select="TechStack" >
+        
+        <xsl:if test="TechStack">
+            <table id="site-table">
+                <thead>
                     <tr>
-                        <td>
-                            <xsl:number level="single" count="TechStack"/>
-                        </td>
-                        <td>
-                            <xsl:variable name="siteName" select="site/name" />
-                            <xsl:variable name="siteDetail" select="'siteDetail.jsp?siteName='" />
-                            <a>
-                                <xsl:attribute name="href">
-                                    <xsl:value-of select="concat($siteDetail,$siteName)" />
-                                </xsl:attribute>
-                                <xsl:value-of select="$siteName"/>
-                            </a>
-                        </td>
+                        <th>No</th>
+                        <th>Url</th>
                     </tr>
-                </xsl:for-each>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <xsl:for-each select="TechStack" >
+                        <tr>
+                            <td>
+                                <xsl:number level="single" count="TechStack"/>
+                            </td>
+                            <td>
+                                <xsl:variable name="siteName" select="site/name" />
+                                <xsl:variable name="siteDetail" select="'siteDetail.jsp?siteName='" />
+                                <a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="concat($siteDetail,$siteName)" />
+                                    </xsl:attribute>
+                                    <xsl:value-of select="$siteName"/>
+                                </a>
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+            </table>
+        </xsl:if>
+        <xsl:if test="not(TechStack)">
+            <h4>No Record Found</h4>
+        </xsl:if>
+
     </xsl:template>
 </xsl:stylesheet>
