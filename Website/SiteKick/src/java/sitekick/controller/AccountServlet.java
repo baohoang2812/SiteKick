@@ -18,12 +18,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gia Bảo Hoàng
  */
-@WebServlet(name = "SiteProcessServlet", urlPatterns = {"/SiteProcessServlet"})
-public class SiteProcessServlet extends HttpServlet {
+@WebServlet(name = "AccountServlet", urlPatterns = {"/AccountServlet"})
+public class AccountServlet extends HttpServlet {
 
-    private static final String VIEW = "SiteViewController";
+    private static final String LOGIN = "LoginServlet";
     private static final String ERROR = "error.jsp";
-    private static final String ANALYSIS = "AnalysisServlet";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,24 +39,18 @@ public class SiteProcessServlet extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-            if (action == null) {
-                url = VIEW;
-            } else {
-                switch (action) {
-                    case "View":
-                        url = VIEW;
-                        break;
-                    case "Analyze":
-                        url = ANALYSIS;
-                        break;
-                    default:
-                        url = VIEW;
-                }
+            switch (action) {
+                case "Login":
+                    url = LOGIN;
+                    break;
+                default:
+                    url = ERROR;
+                    request.setAttribute("Error", "Action not supported");
             }
         } catch (Exception e) {
-            Logger.getLogger(SiteProcessServlet.class.getName()).log(Level.SEVERE, e.getMessage());
-            request.setAttribute("Error", e.getMessage());
             url = ERROR;
+            Logger.getLogger(CrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
+            request.setAttribute("Error", e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

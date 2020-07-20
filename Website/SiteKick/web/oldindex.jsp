@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="css/style.css">
         <!-- <link rel="stylesheet" href="css/responsive.css"> -->
 
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/common.css">
     </head>
 
     <body>

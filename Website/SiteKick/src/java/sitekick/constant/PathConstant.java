@@ -7,9 +7,9 @@ package sitekick.constant;
 
 /**
  *
- * @author Eden
+ * @author Gia Bảo Hoàng
  */
-public class ConfigConstant {
-    public static final String XML_PATH = "/xml/SystemConfig.xml";
-    public static final String XSD_PATH = "/schema/configSchema.xsd";
+public class PathConstant {
+    public static final String SITES_XSL = "/xsl/sites.xsl";
+    public static final String SITE_DETAIL_XSL = "/xsl/siteDetail.xsl";
 }

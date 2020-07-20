@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sitekick.controller;
+package sitekick.controller.account;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,17 +13,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import prx.dao.AccountDAO;
+import prx.entity.Account;
+import prx.entity.EntityContext;
+import sitekick.controller.CrawlerServlet;
 
 /**
  *
  * @author Gia Bảo Hoàng
  */
-@WebServlet(name = "SiteProcessServlet", urlPatterns = {"/SiteProcessServlet"})
-public class SiteProcessServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
 
-    private static final String VIEW = "SiteViewController";
     private static final String ERROR = "error.jsp";
-    private static final String ANALYSIS = "AnalysisServlet";
+    private static final String SUCCESS = "admin.jsp";
+    private static final String INVALID = "login.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,25 +44,29 @@ public class SiteProcessServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if (action == null) {
-                url = VIEW;
+            String username = request.getParameter("txtUsername");
+            String password = request.getParameter("txtPassword");
+            EntityContext entityContext = EntityContext.newInstance();
+            AccountDAO accountDAO = new AccountDAO(entityContext.getEntityManager());
+            entityContext.beginTransaction();
+            Account account = accountDAO.checkLogin(username, password);
+            entityContext.commitTransaction();
+            boolean isValid = true;
+            if (account == null) {
+                isValid = false;
+                request.setAttribute("INVALID", "Invalid Username or Password");
+            }
+            if (isValid) {
+                HttpSession session = request.getSession();
+                session.setAttribute("Account", account);
+                url = SUCCESS;
             } else {
-                switch (action) {
-                    case "View":
-                        url = VIEW;
-                        break;
-                    case "Analyze":
-                        url = ANALYSIS;
-                        break;
-                    default:
-                        url = VIEW;
-                }
+                url = INVALID;
             }
         } catch (Exception e) {
-            Logger.getLogger(SiteProcessServlet.class.getName()).log(Level.SEVERE, e.getMessage());
-            request.setAttribute("Error", e.getMessage());
             url = ERROR;
+            Logger.getLogger(CrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
+            request.setAttribute("Error", e.getMessage());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

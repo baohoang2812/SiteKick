@@ -33,7 +33,7 @@ public class CommonConstant {
     public static final String SLASH_STRING = "/";
     public static final String UNDERSCORE_STRING = "_";
     public static final String HYPHEN_STRING = "-";
-
+    public static final String LINE_FEED = "\n";
     public static final String HTTPS_PROTOCOL = "https";
 
     public static final int POSITION_GAP = 1;

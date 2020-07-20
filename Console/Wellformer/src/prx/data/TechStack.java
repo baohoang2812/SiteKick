@@ -75,6 +75,11 @@ public class TechStack {
     @XmlElement(required = true)
     protected List<TechStack.TechnologyGroup> technologyGroup;
 
+    public void setTechnologyGroup(List<TechnologyGroup> technologyGroup) {
+        this.technologyGroup = technologyGroup;
+    }
+
+    
     /**
      * Gets the value of the site property.
      * 
@@ -127,7 +132,7 @@ public class TechStack {
         }
         return this.technologyGroup;
     }
- 
+
 
     /**
      * <p>Java class for anonymous complex type.
@@ -227,6 +232,11 @@ public class TechStack {
         @XmlElement(required = true)
         protected List<TechStack.TechnologyGroup.Technology> technology;
 
+        public void setTechnology(List<Technology> technology) {
+            this.technology = technology;
+        }
+
+        
         /**
          * Gets the value of the groupName property.
          * 

@@ -26,7 +26,7 @@ public class AlexaParserTest {
      * Test of parse method, of class AlexaParser.
      */
     @Test
-    public void testParse() {
+    public void testParseDetail() {
         System.out.println("parse");
         AlexaParser instance = new AlexaParser();
         instance.parse();

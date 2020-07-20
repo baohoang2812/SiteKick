@@ -6,6 +6,7 @@
     <class>prx.entity.Site</class>
     <class>prx.entity.Technology</class>
     <class>prx.entity.TechnologyGroup</class>
+    <class>prx.entity.Account</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SiteKick"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>

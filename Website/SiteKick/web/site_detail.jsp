@@ -50,7 +50,7 @@
                                 <h3>${siteDetail.Url}</h3>
                                 <nav class="brad_cam_lists">
                                     <ul class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="index.html">Mobile app</a></li>
+                                        <li class="breadcrumb-item"><a href="index.jsp.html">Mobile app</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Design</li>
                                     </ul>
                                 </nav>

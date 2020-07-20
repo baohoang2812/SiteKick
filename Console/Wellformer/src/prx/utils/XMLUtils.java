@@ -97,15 +97,15 @@ public class XMLUtils {
     public static <T> void marshall(T obj, File xmlFile) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(obj.getClass());
         Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.UTF_8);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.UTF_8.toString());
         marshaller.marshal(obj, xmlFile);
     }
-    
-    public static <T> String marshallToString(T obj) throws JAXBException{
+
+    public static <T> String marshallToString(T obj) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(obj.getClass());
         Marshaller marshaller = jaxbContext.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.UTF_8);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, StandardCharsets.UTF_8.toString());
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         StringWriter stringWriter = new StringWriter();
         marshaller.marshal(obj, stringWriter);

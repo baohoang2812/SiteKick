@@ -5,6 +5,7 @@
  */
 package prx.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -71,15 +72,15 @@ public class XMLUtilsTest {
      */
     @Test
     public void testGenerateClass() throws Exception {
-//        System.out.println("Test Generate Class");
-//        String packageName = "prx.data";
-//        String builtWithXsdPath = "src/prx/schema/builtwithSchema.xsd";
-//        String similarWebXsdPath = "src/prx/schema/siteSchema.xsd";
-//        File builtWithSchemaFile = new File(builtWithXsdPath);
-//        File similarWebSchemaFile = new File(similarWebXsdPath);
-//        String outputPath = "src/";
-//        XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
-//        XMLUtils.generateClass(packageName, similarWebSchemaFile, outputPath);
+        System.out.println("Test Generate Class");
+        String packageName = "prx.data";
+        String builtWithXsdPath = "src/prx/schema/builtwithSchema.xsd";
+        String similarWebXsdPath = "src/prx/schema/siteSchema.xsd";
+        File builtWithSchemaFile = new File(builtWithXsdPath);
+        File similarWebSchemaFile = new File(similarWebXsdPath);
+        String outputPath = "src/";
+        XMLUtils.generateClass(packageName, builtWithSchemaFile, outputPath);
+        XMLUtils.generateClass(packageName, similarWebSchemaFile, outputPath);
     }
 
     /**

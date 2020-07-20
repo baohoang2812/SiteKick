@@ -18,9 +18,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import prx.config.Config;
+import prx.constant.CommonConstant;
 import prx.dao.SiteDAO;
 import prx.entity.EntityContext;
 import prx.entity.Site;
+import prx.services.SiteService;
+import sitekick.constant.CacheConstant;
 import sitekick.constant.ConfigConstant;
 import sitekick.crawler.SiteKickCrawler;
 
@@ -30,8 +33,10 @@ import sitekick.crawler.SiteKickCrawler;
  */
 @WebServlet(name = "AnalysisServlet", urlPatterns = {"/AnalysisServlet"})
 public class AnalysisServlet extends HttpServlet {
+
     private static final String SUCCESS = "siteDetail.jsp";
     private static final String ERROR = "error.jsp";
+    private static final String INVALID = "index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,34 +52,43 @@ public class AnalysisServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String siteUrl = request.getParameter("txtUrl");
+            String siteUrl = request.getParameter("txtDomain");
             if (siteUrl != null && !siteUrl.trim().isEmpty()) {
                 URL urlObj = new URL(siteUrl);
                 String domain = urlObj.getHost();
-                String siteURL = domain.replace("www.", "");
-                EntityContext entityContext = EntityContext.newInstance();
-                SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
-                Site site = siteDAO.getFirstSiteByURL(siteURL);
-                if (null != site) {
+                if (!domain.isEmpty()) {
+                    String siteURL = domain.replace("www.", CommonConstant.EMPTY);
+                    EntityContext entityContext = EntityContext.newInstance();
+                    SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
+                    Site site = siteDAO.getFirstSiteByURL(siteURL);
+                    if (site == null) {
+                        Site newSite = new Site();
+                        newSite.setUrl(siteURL);
+                        entityContext.beginTransaction();
+                        siteDAO.create(newSite);
+                        entityContext.commitTransaction();
+                        SiteKickCrawler crawler = new SiteKickCrawler();
+                        ServletContext servletContext = request.getServletContext();
+                        String xsdPath = servletContext.getRealPath(ConfigConstant.XSD_PATH);
+                        String xmlPath = servletContext.getRealPath(ConfigConstant.XML_PATH);
+
+                        Config config = crawler.loadConfiguration(xsdPath, xmlPath);
+                        Set<String> domainSet = new HashSet();
+                        domainSet.add(siteURL);
+                        crawler.parseBuiltWith(domainSet, config.getBuiltWith(), servletContext);
+                        //TODO reset servletContext.attribute and reload all sites
+                        // reload Servlet Context
+                        SiteService siteService = new SiteService(siteDAO);
+                        String sitesXML = siteService.getAllSitesXMLString();
+                        servletContext.setAttribute(CacheConstant.SITES_XML, sitesXML);
+                    }
                     request.setAttribute("SITE", site);
+                    url = SUCCESS + "?siteName=" + siteURL;
                 } else {
-                    Site newSite = new Site();
-                    newSite.setUrl(siteURL);
-                    entityContext.beginTransaction();
-                    siteDAO.create(site);
-                    entityContext.commitTransaction();
-                    SiteKickCrawler crawler = new SiteKickCrawler();
-                    ServletContext servletContext= request.getServletContext();
-                    String xsdPath = servletContext.getRealPath(ConfigConstant.XSD_PATH);
-                    String xmlPath = servletContext.getRealPath(ConfigConstant.XML_PATH);
-                    
-                    Config config = crawler.loadConfiguration(xsdPath, xmlPath);
-                    Set<String> domainSet = new HashSet();
-                    domainSet.add(siteURL);
-                    crawler.parseBuiltWith(domainSet, config.getBuiltWith(), servletContext);
-                    request.setAttribute("SITE", site);
+                    url = INVALID;
+                    request.setAttribute("Invalid", "Invalid domain, please retry. E.g: http://www.yourdomain.com");
                 }
-                url = SUCCESS;
+
             }
 
         } catch (Exception e) {

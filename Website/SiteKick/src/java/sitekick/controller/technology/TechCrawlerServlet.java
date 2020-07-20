@@ -20,7 +20,8 @@ import prx.config.Config;
 import sitekick.crawler.SiteKickCrawler;
 import prx.dao.SiteDAO;
 import prx.entity.EntityContext;
-import sitekick.constant.ConfigConstant;
+import prx.services.SiteService;
+import sitekick.constant.CacheConstant;
 
 /**
  *
@@ -30,7 +31,7 @@ import sitekick.constant.ConfigConstant;
 public class TechCrawlerServlet extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "index.html";
+    private static final String SUCCESS = "index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,18 +49,22 @@ public class TechCrawlerServlet extends HttpServlet {
         try {
             SiteKickCrawler crawler = new SiteKickCrawler();
             ServletContext servletContext = getServletContext();
-            String xsdPath = servletContext.getRealPath(ConfigConstant.XSD_PATH);
-            String xmlPath = servletContext.getRealPath(ConfigConstant.XML_PATH);
+            String xsdPath = (String) servletContext.getAttribute(CacheConstant.CONFIG_XSD);
+            String xmlPath = (String) servletContext.getAttribute(CacheConstant.CONFIG_XML);
+            EntityContext entityContext = EntityContext.newInstance();
+            SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
             Config config = crawler.loadConfiguration(xsdPath, xmlPath);
             if (config != null && config.getBuiltWith() != null) {
-                EntityContext entityContext = EntityContext.newInstance();
-                SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
                 entityContext.beginTransaction();
                 Set<String> urlList = new HashSet(siteDAO.getAllSiteUrl());
                 entityContext.commitTransaction();
                 crawler.parseBuiltWith(urlList, config.getBuiltWith(), servletContext);
                 url = SUCCESS;
+                request.setAttribute("INFO", "Crawl Technology Successfully!");
             }
+            // reload Servlet Context
+            SiteService siteService = new SiteService(siteDAO);
+            servletContext.setAttribute(CacheConstant.SITES_XML, siteService.getAllSitesXMLString());
         } catch (Exception e) {
             Logger.getLogger(TechCrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
             request.setAttribute("Error", e.getMessage());

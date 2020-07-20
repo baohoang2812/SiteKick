@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import prx.config.Config;
+import sitekick.constant.CacheConstant;
 import sitekick.crawler.SiteKickCrawler;
-import sitekick.constant.ConfigConstant;
 
 /**
  *
@@ -26,7 +26,7 @@ import sitekick.constant.ConfigConstant;
 public class SiteCrawlerServlet extends HttpServlet {
 
     private static final String ERROR = "error.jsp";
-    private static final String SUCCESS = "index.html";
+    private static final String SUCCESS = "index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,12 +44,13 @@ public class SiteCrawlerServlet extends HttpServlet {
         try {
             SiteKickCrawler crawler = new SiteKickCrawler();
             ServletContext servletContext = getServletContext();
-            String xsdPath = servletContext.getRealPath(ConfigConstant.XSD_PATH);
-            String xmlPath = servletContext.getRealPath(ConfigConstant.XML_PATH);
+            String xsdPath = (String) servletContext.getAttribute(CacheConstant.CONFIG_XSD);
+            String xmlPath = (String) servletContext.getAttribute(CacheConstant.CONFIG_XML);
             Config config = crawler.loadConfiguration(xsdPath, xmlPath);
             if (config != null && config.getAlexa() != null) {
                 crawler.parseSite(config.getAlexa(), servletContext);
                 url = SUCCESS;
+                request.setAttribute("INFO", "Crawl Sites Successfully!");
             }
         } catch (Exception e) {
             Logger.getLogger(SiteCrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());
