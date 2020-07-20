@@ -10,8 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Dashboard</title>
+        <%@include file="commonCss.jsp" %>
     </head>
     <body>
+        <%@include file="header.jsp" %>
         <h1>Admin Dashboard</h1>
         <c:set var="info" value="${requestScope.INFO}"/>
         <c:if test="${not empty info}">
