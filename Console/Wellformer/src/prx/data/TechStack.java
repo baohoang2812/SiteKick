@@ -1,20 +1,22 @@
-
 package prx.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p>
+ * Java class for anonymous complex type.
+ *
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -59,8 +61,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -79,14 +81,11 @@ public class TechStack {
         this.technologyGroup = technologyGroup;
     }
 
-    
     /**
      * Gets the value of the site property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TechStack.Site }
-     *     
+     *
+     * @return possible object is {@link TechStack.Site }
+     *
      */
     public TechStack.Site getSite() {
         return site;
@@ -94,11 +93,9 @@ public class TechStack {
 
     /**
      * Sets the value of the site property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TechStack.Site }
-     *     
+     *
+     * @param value allowed object is {@link TechStack.Site }
+     *
      */
     public void setSite(TechStack.Site value) {
         this.site = value;
@@ -106,25 +103,25 @@ public class TechStack {
 
     /**
      * Gets the value of the technologyGroup property.
-     * 
+     *
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the technologyGroup property.
-     * 
+     * This accessor method returns a reference to the live list, not a
+     * snapshot. Therefore any modification you make to the returned list will
+     * be present inside the JAXB object. This is why there is not a
+     * <CODE>set</CODE> method for the technologyGroup property.
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getTechnologyGroup().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link TechStack.TechnologyGroup }
-     * 
-     * 
+     *
+     *
      */
     public List<TechStack.TechnologyGroup> getTechnologyGroup() {
         if (technologyGroup == null) {
@@ -133,12 +130,14 @@ public class TechStack {
         return this.technologyGroup;
     }
 
-
     /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p>
+     * Java class for anonymous complex type.
+     *
+     * <p>
+     * The following schema fragment specifies the expected content contained
+     * within this class.
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -150,8 +149,8 @@ public class TechStack {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
+     *
+     *
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
@@ -164,11 +163,9 @@ public class TechStack {
 
         /**
          * Gets the value of the name property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is {@link String }
+         *
          */
         public String getName() {
             return name;
@@ -176,11 +173,9 @@ public class TechStack {
 
         /**
          * Sets the value of the name property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is {@link String }
+         *
          */
         public void setName(String value) {
             this.name = value;
@@ -188,12 +183,14 @@ public class TechStack {
 
     }
 
-
     /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p>
+     * Java class for anonymous complex type.
+     *
+     * <p>
+     * The following schema fragment specifies the expected content contained
+     * within this class.
+     *
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -217,8 +214,8 @@ public class TechStack {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
+     *
+     *
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
@@ -236,14 +233,11 @@ public class TechStack {
             this.technology = technology;
         }
 
-        
         /**
          * Gets the value of the groupName property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is {@link String }
+         *
          */
         public String getGroupName() {
             return groupName;
@@ -251,11 +245,9 @@ public class TechStack {
 
         /**
          * Sets the value of the groupName property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is {@link String }
+         *
          */
         public void setGroupName(String value) {
             this.groupName = value;
@@ -263,25 +255,25 @@ public class TechStack {
 
         /**
          * Gets the value of the technology property.
-         * 
+         *
          * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the technology property.
-         * 
+         * This accessor method returns a reference to the live list, not a
+         * snapshot. Therefore any modification you make to the returned list
+         * will be present inside the JAXB object. This is why there is not a
+         * <CODE>set</CODE> method for the technology property.
+         *
          * <p>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getTechnology().add(newItem);
          * </pre>
-         * 
-         * 
+         *
+         *
          * <p>
          * Objects of the following type(s) are allowed in the list
          * {@link TechStack.TechnologyGroup.Technology }
-         * 
-         * 
+         *
+         *
          */
         public List<TechStack.TechnologyGroup.Technology> getTechnology() {
             if (technology == null) {
@@ -290,12 +282,34 @@ public class TechStack {
             return this.technology;
         }
 
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (!(obj instanceof TechnologyGroup)) {
+                return false;
+            }
+            TechnologyGroup other = (TechnologyGroup) obj;
+            return Objects.equals(groupName, other.groupName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(groupName);
+        }
 
         /**
-         * <p>Java class for anonymous complex type.
-         * 
-         * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
+         * <p>
+         * Java class for anonymous complex type.
+         *
+         * <p>
+         * The following schema fragment specifies the expected content
+         * contained within this class.
+         *
          * <pre>
          * &lt;complexType>
          *   &lt;complexContent>
@@ -308,8 +322,8 @@ public class TechStack {
          *   &lt;/complexContent>
          * &lt;/complexType>
          * </pre>
-         * 
-         * 
+         *
+         *
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
@@ -325,11 +339,9 @@ public class TechStack {
 
             /**
              * Gets the value of the techName property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
+             *
+             * @return possible object is {@link String }
+             *
              */
             public String getTechName() {
                 return techName;
@@ -337,11 +349,9 @@ public class TechStack {
 
             /**
              * Sets the value of the techName property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
+             *
+             * @param value allowed object is {@link String }
+             *
              */
             public void setTechName(String value) {
                 this.techName = value;
@@ -349,11 +359,9 @@ public class TechStack {
 
             /**
              * Gets the value of the description property.
-             * 
-             * @return
-             *     possible object is
-             *     {@link String }
-             *     
+             *
+             * @return possible object is {@link String }
+             *
              */
             public String getDescription() {
                 return description;
@@ -361,11 +369,9 @@ public class TechStack {
 
             /**
              * Sets the value of the description property.
-             * 
-             * @param value
-             *     allowed object is
-             *     {@link String }
-             *     
+             *
+             * @param value allowed object is {@link String }
+             *
              */
             public void setDescription(String value) {
                 this.description = value;
