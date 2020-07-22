@@ -60,7 +60,6 @@ public class AlexaParser extends Parser {
         this.urlXPath = urlXPath;
     }
 
-
     public void setCategoryNavigationPath(String categoryNavigationPath) {
         this.categoryNavigationPath = categoryNavigationPath;
     }
@@ -116,9 +115,8 @@ public class AlexaParser extends Parser {
     public void setUrlXPath(String urlXPath) {
         this.urlXPath = urlXPath;
     }
-    
 
-    private void parseAllCategory() {
+    private void getCategoryLinks() {
         String homePage = constructLink(null);
         try {
             String homePageContent = preprocessPageContent(homePage);
@@ -128,7 +126,10 @@ public class AlexaParser extends Parser {
             System.out.println("!!!Parsing Home Page ERROR!!!");
             Logger.getLogger(AlexaParser.class.getName()).log(Level.SEVERE, e.getMessage());
         }
+    }
 
+    private void parseAllCategory() {
+        getCategoryLinks();
         this.setNavigationPath(categoryNavigationPath);
         for (String categoryPath : categoryLinkSet) {
             try {
@@ -159,7 +160,6 @@ public class AlexaParser extends Parser {
                 transformer.setParameter("categoryName", category);
                 List<Site> siteList = parsePageSet(Site.class, pageDetailLinkSet, transformer);
                 insertSiteList(siteList);
-                // pageDetailLinkSet = new HashSet();
                 System.out.println("Finish parsing page: " + constructLink(categoryPath));
             } catch (IOException | XPathExpressionException | ParserConfigurationException | SAXException | TransformerConfigurationException e) {
                 System.out.println("!!!Parsing Category Page ERROR!!! " + constructLink(categoryPath));

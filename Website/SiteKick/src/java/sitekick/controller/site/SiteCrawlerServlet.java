@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import prx.config.Config;
+import prx.dao.SiteDAO;
+import prx.entity.EntityContext;
+import prx.services.SiteService;
 import sitekick.constant.CacheConstant;
 import sitekick.crawler.SiteKickCrawler;
 
@@ -51,6 +54,11 @@ public class SiteCrawlerServlet extends HttpServlet {
                 crawler.parseSite(config.getAlexa(), servletContext);
                 url = SUCCESS;
                 request.setAttribute("INFO", "Crawl Sites Successfully!");
+                // reload Servlet Context
+                EntityContext entityContext = EntityContext.newInstance();
+                SiteDAO siteDAO = new SiteDAO(entityContext.getEntityManager());
+                SiteService siteService = new SiteService(siteDAO);
+                servletContext.setAttribute(CacheConstant.SITES_XML, siteService.getAllSitesXMLString());
             }
         } catch (Exception e) {
             Logger.getLogger(SiteCrawlerServlet.class.getName()).log(Level.SEVERE, e.getMessage());

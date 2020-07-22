@@ -17,6 +17,11 @@
     <body>
         <%@include file="header.jsp" %>
         <h1>Site List</h1>
-        <x:transform doc="${applicationScope['sitesXML']}" xslt="${applicationScope['sitesXSL']}" />
+        <c:if test="${not empty applicationScope['sitesXML']}">
+            <x:transform doc="${applicationScope['sitesXML']}" xslt="${applicationScope['sitesXSL']}" />
+        </c:if>
+        <c:if test="${empty applicationScope['sitesXML']}">
+            <h3>No Record Found</h3>
+        </c:if>
     </body>
 </html>

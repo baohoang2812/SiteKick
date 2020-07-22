@@ -10,8 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ERROR Page</title>
+        <%@include file="commonCss.jsp" %>
     </head>
     <body>
+        <%@include file="header.jsp" %>
         <h1>Oops... There is an error. Contact administrator for more information!</h1>
         <h3>
             Error description: 
