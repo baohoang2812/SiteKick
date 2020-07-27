@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import prx.dao.AccountDAO;
-import prx.entity.Account;
-import prx.entity.EntityContext;
+import sitekick.dao.AccountDAO;
+import sitekick.entity.Account;
+import sitekick.entity.EntityContext;
 import sitekick.controller.CrawlerServlet;
 
 /**

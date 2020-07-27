@@ -10,10 +10,10 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import prx.dao.SiteDAO;
-import prx.entity.EntityContext;
-import prx.services.SiteService;
-import prx.utils.FileUtils;
+import sitekick.dao.SiteDAO;
+import sitekick.entity.EntityContext;
+import sitekick.services.SiteService;
+import sitekick.utils.FileUtils;
 
 import sitekick.constant.CacheConstant;
 import sitekick.constant.ConfigConstant;

@@ -16,11 +16,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import prx.config.Config;
+import sitekick.config.Config;
 import sitekick.crawler.SiteKickCrawler;
-import prx.dao.SiteDAO;
-import prx.entity.EntityContext;
-import prx.services.SiteService;
+import sitekick.dao.SiteDAO;
+import sitekick.entity.EntityContext;
+import sitekick.services.SiteService;
 import sitekick.constant.CacheConstant;
 
 /**

@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import prx.constant.CommonConstant;
-import prx.entity.EntityContext;
-import prx.dao.SiteDAO;
-import prx.entity.Site;
+import sitekick.constant.CommonConstant;
+import sitekick.entity.EntityContext;
+import sitekick.dao.SiteDAO;
+import sitekick.entity.Site;
 
 /**
  *

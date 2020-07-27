@@ -12,12 +12,12 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.xml.bind.JAXBException;
 import org.xml.sax.SAXException;
-import prx.config.Config;
-import prx.constant.ConfigConstant;
-import prx.exception.InvalidException;
-import prx.parser.AlexaParser;
-import prx.parser.BuiltWithParser;
-import prx.utils.XMLUtils;
+import sitekick.config.Config;
+import sitekick.constant.ConfigConstant;
+import sitekick.exception.InvalidException;
+import sitekick.parser.AlexaParser;
+import sitekick.parser.BuiltWithParser;
+import sitekick.utils.XMLUtils;
 
 /**
  *

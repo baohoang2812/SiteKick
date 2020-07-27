@@ -15,10 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import prx.dao.TechnologyDAO;
-import prx.data.TechnologySuggestion;
-import prx.entity.EntityContext;
-import prx.services.TechnologyService;
+import sitekick.dao.TechnologyDAO;
+import sitekick.data.TechnologySuggestion;
+import sitekick.entity.EntityContext;
+import sitekick.services.TechnologyService;
 import sitekick.constant.ConfigConstant;
 import sitekick.controller.CrawlerServlet;
 
